@@ -89,8 +89,34 @@ export default function BookViewer() {
 
       <div className="pt-20 flex-1 w-full flex items-center justify-center p-4 lg:p-12 relative overflow-hidden">
 
-        {/* Scattered Desk Items (Visible when book is closed/centered) */}
+        {/* Scattered Desk Items */}
         <DeskEnvironment currentIdx={currentIdx} />
+
+        {/* MP3 Player - lives OUTSIDE DeskEnvironment so pointer-events always work */}
+        {currentIdx === 0 && (
+          <div className="absolute top-[22%] left-[2%] sm:left-[5%] md:left-[7%] pointer-events-auto hidden lg:block" style={{ transform: 'rotateZ(-12deg)', zIndex: 60 }}>
+            <RetroMP3Player />
+            {/* Visual cue to click */}
+            <motion.div
+              className="absolute -bottom-10 left-8 pointer-events-none flex flex-col items-center"
+              animate={{ x: [-4, 4, -4] }}
+              transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+              style={{ transform: 'rotateZ(10deg)' }}
+            >
+              <span className="font-hand text-white text-base font-bold whitespace-nowrap" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.4)' }}>click for vibes!</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ transform: 'rotate(-40deg)' }}>
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </motion.div>
+          </div>
+        )}
+
+        {/* Vintage Stamp - lives OUTSIDE DeskEnvironment, positioned below MP3 */}
+        {currentIdx === 0 && (
+          <div className="absolute top-[49%] left-[11%] hidden lg:block" style={{ transform: 'rotate(-12deg)', zIndex: 55 }}>
+            <VintageStampSVG />
+          </div>
+        )}
 
         {/* The actual flipbook */}
         <HTMLFlipBook
@@ -219,18 +245,10 @@ function DeskEnvironment({ currentIdx }) {
           </div>
         </div>
 
-        {/* Retro MP3 Player on the Left */}
-        <div className="absolute top-[25%] left-[2%] sm:left-[5%] md:left-[8%] pointer-events-auto z-20" style={{ transform: 'rotateZ(-12deg)' }}>
-          <RetroMP3Player />
-        </div>
-
-        {/* Vintage Stamp (Top Left Edge) */}
-        <div className="absolute top-[35%] left-[-2%] rotate-[-15deg] z-10 cursor-pointer transition-transform hover:scale-105">
-          <VintageStampSVG />
-        </div>
+        {/* Vintage Stamp was moved outside DeskEnvironment */}
 
         {/* Crumpled Paper */}
-        <div className="absolute top-[55%] left-[6%] rotate-[35deg]">
+        <div className="absolute top-[40%] right-[3%] rotate-[35deg]">
           <CrumpledPaperSVG />
         </div>
 
@@ -242,7 +260,8 @@ function DeskEnvironment({ currentIdx }) {
           </div>
         </div>
 
-        <div className="absolute bottom-[10%] right-[15%] rotate-[10deg]">
+        {/* Napkin Scribble - bottom right desk area */}
+        <div className="absolute bottom-[12%] right-[10%] rotate-[10deg]">
           <NapkinScribbleSVG />
         </div>
 
@@ -257,14 +276,9 @@ function DeskEnvironment({ currentIdx }) {
         </div>
 
         {/* AirPods Case */}
-        <div className="absolute bottom-[5%] left-[10%] rotate-[25deg]">
+        <div className="absolute bottom-[20%] left-[10%] rotate-[25deg]">
           <AirPodsSVG />
         </div>
-
-
-
-
-
         {/* Scattered Paperclips */}
         <PaperclipSVG style={{ top: '65%', left: '38%', transform: 'rotate(45deg)' }} />
         <PaperclipSVG style={{ top: '70%', left: '35%', transform: 'rotate(-20deg)' }} />
