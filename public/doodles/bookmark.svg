@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 80" width="48" height="80" fill="none">
+
+  <!-- Bookmark body — ribbon that tapers at bottom -->
+  <path id="body"
+        d="M6 2 L42 2 L42 72 L24 58 L6 72 Z"
+        stroke="#7a5a38" stroke-width="2.2" stroke-linejoin="round"
+        fill="rgba(224,212,247,0.6)"/>
+
+  <!-- Top decorative band — like a different colored header -->
+  <path id="header-band"
+        d="M6 2 L42 2 L42 14 L6 14 Z"
+        stroke="#7a5a38" stroke-width="1.2"
+        fill="rgba(197,232,247,0.5)"/>
+
+  <!-- Two text lines — suggest written content -->
+  <g id="lines" stroke="#7a5a38" stroke-width="1.5" stroke-linecap="round" opacity="0.5">
+    <line x1="14" y1="26" x2="34" y2="26"/>
+    <line x1="14" y1="36" x2="28" y2="36"/>
+    <line x1="14" y1="46" x2="32" y2="46"/>
+  </g>
+
+  <!-- Small star decoration in header -->
+  <path id="star"
+        d="M24 8 L25.2 7 L24.5 5.5 L26 6 L24 4 L22 6 L23.5 5.5 L22.8 7 Z"
+        fill="#7a5a38" opacity="0.45"/>
+
+  <!-- Subtle fold crease on right edge -->
+  <path id="crease"
+        d="M38 18 Q42 22 40 28"
+        stroke="#7a5a38" stroke-width="0.8" stroke-linecap="round"
+        opacity="0.25" fill="none"/>
+
+</svg>

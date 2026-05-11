@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 72" width="88" height="72" fill="none">
+
+  <!-- Bubble body — rounded rectangle with soft corners -->
+  <path id="bubble"
+        d="M8 6
+           Q8 3 11 3
+           L77 3
+           Q80 3 80 6
+           L80 46
+           Q80 49 77 49
+           L44 49
+           L32 64
+           L30 49
+           L11 49
+           Q8 49 8 46
+           Z"
+        stroke="#7a5a38" stroke-width="2.2" stroke-linejoin="round"
+        fill="rgba(255,255,255,0.55)"/>
+
+  <!-- Three dots inside — "thinking / typing" indicator -->
+  <g id="typing-dots" fill="#7a5a38" opacity="0.55">
+    <circle cx="30" cy="26" r="4"/>
+    <circle cx="44" cy="26" r="4"/>
+    <circle cx="58" cy="26" r="4"/>
+  </g>
+
+  <!-- Subtle interior line at top — ruled paper feel -->
+  <line id="rule" x1="20" y1="16" x2="68" y2="16"
+        stroke="#7a5a38" stroke-width="0.8" opacity="0.18"/>
+
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 28" width="240" height="28" fill="none">
+
+  <!--
+    Three underline variants stacked — use whichever suits the context.
+    Each is in its own <g> with a unique id for easy removal/restyling.
+
+    Variant 1 (top):    single wave — gentle, decorative
+    Variant 2 (middle): double wave — emphasis
+    Variant 3 (bottom): dashed straight — minimal / typewriter feel
+  -->
+
+  <!-- Variant 1 — single wavy line -->
+  <path id="wave-single"
+        d="M4 7 Q32 1 60 7 Q88 13 116 7 Q144 1 172 7 Q200 13 236 5"
+        stroke="#c8b8a0" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Variant 2 — double wave (slightly offset) -->
+  <g id="wave-double">
+    <path d="M4 17 Q32 11 60 17 Q88 23 116 17 Q144 11 172 17 Q200 23 236 15"
+          stroke="#c8b8a0" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M4 21 Q32 15 60 21 Q88 27 116 21 Q144 15 172 21 Q200 27 236 19"
+          stroke="#c8b8a0" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.5"/>
+  </g>
+
+  <!-- Variant 3 — hand-drawn dashed baseline -->
+  <!-- (hidden by default via display:none — toggle as needed) -->
+  <line id="dashed-line"
+        x1="4" y1="26" x2="236" y2="26"
+        stroke="#c8b8a0" stroke-width="1.5" stroke-dasharray="6 4" stroke-linecap="round"
+        display="none"/>
+
+</svg>

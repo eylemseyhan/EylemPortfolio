@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 56" width="88" height="56" fill="none">
+
+  <!-- Left bracket < -->
+  <path id="bracket-left"
+        d="M26 6 L6 28 L26 50"
+        stroke="#7a5a38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Slash / -->
+  <path id="slash"
+        d="M54 6 L36 50"
+        stroke="#7a5a38" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Right bracket > -->
+  <path id="bracket-right"
+        d="M62 6 L82 28 L62 50"
+        stroke="#7a5a38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Tiny dot accent — hand-drawn feel -->
+  <circle cx="44" cy="50" r="2.5" fill="#7a5a38" opacity="0.35"/>
+
+</svg>

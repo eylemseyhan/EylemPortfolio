@@ -38,7 +38,7 @@ export default function TimelineEntry({ entry, index, side }) {
 
         {/* Current label */}
         {entry.current && (
-          <div className="absolute -top-2 -right-2 bg-rose-400 text-white font-caveat text-xs px-2 py-0.5 rounded-full rotate-12"
+          <div className="absolute -top-2 -right-2 bg-rose-400 text-white font-hand text-xs px-2 py-0.5 rounded-full rotate-12"
             style={{ background: '#ff8fab', boxShadow: '1px 2px 0 rgba(0,0,0,0.15)' }}>
             ★ CURRENT
           </div>
@@ -48,14 +48,14 @@ export default function TimelineEntry({ entry, index, side }) {
         <div className="flex items-start gap-2 mb-2">
           <span className="text-2xl flex-shrink-0">{entry.emoji}</span>
           <div>
-            <h3 className="font-caveat font-bold text-lg text-[#3d2b1f] leading-tight">
+            <h3 className="font-hand font-bold text-lg text-[#3d2b1f] leading-tight">
               {entry.title}
             </h3>
             {entry.period && (
-              <p className="font-patrick text-xs text-[#7a6a5a]">{entry.period}</p>
+              <p className="font-nunito text-xs text-[#7a6a5a]">{entry.period}</p>
             )}
             {entry.subtitle && (
-              <p className="font-patrick text-xs text-[#7a6a5a]">{entry.subtitle}</p>
+              <p className="font-nunito text-xs text-[#7a6a5a]">{entry.subtitle}</p>
             )}
           </div>
         </div>
@@ -69,7 +69,7 @@ export default function TimelineEntry({ entry, index, side }) {
         {entry.stack && (
           <div className="flex flex-wrap gap-1 mt-2">
             {entry.stack.map((s, i) => (
-              <span key={i} className="font-patrick text-xs px-2 py-0.5 rounded-full"
+              <span key={i} className="font-nunito text-xs px-2 py-0.5 rounded-full"
                 style={{ background: 'rgba(255,255,255,0.6)', border: `1px solid ${colors.border}` }}>
                 {s}
               </span>

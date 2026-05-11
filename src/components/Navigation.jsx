@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion'
 
 const pages = [
-  { id: 'about', label: 'About', emoji: '👋' },
-  { id: 'timeline', label: 'Journey', emoji: '🗺️' },
-  { id: 'projects', label: 'Projects', emoji: '🚀' },
-  { id: 'skills', label: 'Skills', emoji: '🧰' },
-  { id: 'contact', label: 'Contact', emoji: '✉️' },
+  { id: 'about', label: 'About', emoji: '✿' },
+  { id: 'timeline', label: 'Journey', emoji: '✎' },
+  { id: 'projects', label: 'Projects', emoji: '★' },
+  { id: 'skills', label: 'Skills', emoji: '◎' },
+  { id: 'contact', label: 'Contact', emoji: '♡' },
 ]
 
 export default function Navigation({ activePage, onNavigate }) {
@@ -26,9 +26,9 @@ export default function Navigation({ activePage, onNavigate }) {
       <motion.button
         onClick={() => onNavigate('cover')}
         whileHover={{ rotate: -2, scale: 1.05 }}
-        className="font-caveat text-xl font-bold text-[#3d2b1f] flex items-center gap-2"
+        className="font-hand text-xl font-bold text-[#3d2b1f] flex items-center gap-2"
       >
-        <span>📓</span>
+        <span>✎</span>
         <span>Eylem's Sketchbook</span>
       </motion.button>
 
@@ -40,7 +40,7 @@ export default function Navigation({ activePage, onNavigate }) {
             onClick={() => onNavigate(page.id)}
             whileHover={{ y: -2, rotate: (i % 2 === 0 ? -1 : 1) }}
             whileTap={{ scale: 0.95 }}
-            className="font-caveat text-base px-3 py-1.5 rounded-lg transition-all"
+            className="font-hand text-base px-3 py-1.5 rounded-lg transition-all"
             style={{
               background: activePage === page.id ? '#C8F0DC' : 'transparent',
               border: activePage === page.id ? '1.5px solid #8fd4aa' : '1.5px solid transparent',

@@ -15,8 +15,8 @@ export default {
         rose: '#FFD6E0',
       },
       fontFamily: {
-        caveat: ['Caveat', 'cursive'],
-        patrick: ['Patrick Hand', 'cursive'],
+        sketch: ['DoubleTroubleSara', 'cursive'],
+        hand: ['Architects Daughter', 'cursive'],
         nunito: ['Nunito', 'sans-serif'],
       },
     },

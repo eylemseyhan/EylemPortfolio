@@ -49,10 +49,10 @@ export default function ProjectCard({ project }) {
       <div className="flex items-start gap-3 mb-3">
         <span className="text-3xl flex-shrink-0">{project.emoji}</span>
         <div>
-          <h3 className="font-caveat font-bold text-xl text-[#3d2b1f] leading-tight">
+          <h3 className="font-hand font-bold text-xl text-[#3d2b1f] leading-tight">
             {project.title}
           </h3>
-          <p className="font-patrick text-xs text-[#7a6a5a] mt-0.5">{project.type}</p>
+          <p className="font-nunito text-xs text-[#7a6a5a] mt-0.5">{project.type}</p>
         </div>
       </div>
 
@@ -64,7 +64,7 @@ export default function ProjectCard({ project }) {
       {/* Stack tags */}
       <div className="flex flex-wrap gap-1.5 mb-4">
         {project.stack.map((s, i) => (
-          <span key={i} className="font-patrick text-xs px-2 py-0.5 rounded-full"
+          <span key={i} className="font-nunito text-xs px-2 py-0.5 rounded-full"
             style={{
               background: 'rgba(255,255,255,0.65)',
               border: `1.5px solid ${colors.border}`,
@@ -82,7 +82,7 @@ export default function ProjectCard({ project }) {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
-        className="inline-flex items-center gap-2 font-caveat font-bold text-base px-4 py-2 rounded-lg"
+        className="inline-flex items-center gap-2 font-hand font-bold text-base px-4 py-2 rounded-lg"
         style={{
           background: 'rgba(255,255,255,0.7)',
           border: `2px solid ${colors.border}`,
@@ -101,6 +101,12 @@ export default function ProjectCard({ project }) {
         <circle cx="12" cy="12" r="8" stroke="#7a6a5a" strokeWidth="1.5" fill="none" />
         <path d="M8 12 Q12 6 16 12" stroke="#7a6a5a" strokeWidth="1.2" fill="none" strokeLinecap="round" />
       </svg>
+
+      {/* Tiny coffee ring — like the mug was rested here */}
+      <div className="absolute -bottom-2 -right-2 pointer-events-none opacity-25"
+        style={{ width: 32, height: 32 }}>
+        <div className="coffee-ring w-full h-full" />
+      </div>
     </motion.div>
   )
 }

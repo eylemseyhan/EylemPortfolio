@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 68" width="80" height="68" fill="none">
+
+  <!-- Main body — classic folded triangle -->
+  <path id="plane-body"
+        d="M4 36 L74 8 L52 62 L34 44 Z"
+        stroke="#7a5a38" stroke-width="2.2" stroke-linejoin="round"
+        fill="rgba(197,232,247,0.5)"/>
+
+  <!-- Bottom wing fold -->
+  <path id="wing-fold"
+        d="M34 44 L30 62 L44 52"
+        stroke="#7a5a38" stroke-width="1.8" stroke-linejoin="round"
+        fill="rgba(197,232,247,0.35)"/>
+
+  <!-- Center crease line — gives it a folded paper feel -->
+  <path id="center-crease"
+        d="M4 36 L34 44"
+        stroke="#7a5a38" stroke-width="1.2" stroke-linecap="round"
+        stroke-dasharray="4 3" opacity="0.45"/>
+
+  <!-- Motion trail lines — indicates it's flying -->
+  <g id="trail" stroke="#7a5a38" stroke-width="1.4" stroke-linecap="round" opacity="0.3">
+    <line x1="2"  y1="28" x2="20" y2="24"/>
+    <line x1="2"  y1="36" x2="14" y2="36"/>
+    <line x1="2"  y1="44" x2="18" y2="48"/>
+  </g>
+
+</svg>
