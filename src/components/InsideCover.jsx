@@ -51,10 +51,10 @@ export default function InsideCover({ onNavigate }) {
             <motion.button
               key={link.id}
               onClick={() => onNavigate && onNavigate(link.id)}
-              whileHover={{ x: 5, color: '#d97757' }}
-              className="text-left font-caveat text-2xl text-[#5a4a3a] transition-colors flex items-center group"
+              whileHover={{ x: 6, color: '#d97757' }}
+              className="text-left font-hand text-xl text-[#3d2b1f] transition-colors flex items-center group gap-2"
             >
-              <span className="opacity-0 group-hover:opacity-100 text-[#d97757] text-lg mr-2 transition-opacity">→</span>
+              <span className="opacity-0 group-hover:opacity-100 text-[#d97757] transition-opacity">→</span>
               {link.label}
             </motion.button>
           ))}
@@ -66,40 +66,6 @@ export default function InsideCover({ onNavigate }) {
           <path d="M25 10 L35 15 L30 25" stroke="#5a4a3a" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
-
-      {/* --- RESUME / CV (TUCKED PAPER) --- */}
-      <motion.a
-        href="/EylemSeyhan_CV.pdf"
-        download="EylemSeyhan_CV.pdf"
-        target="_blank"
-        rel="noreferrer"
-        className="absolute bottom-[20%] left-[20%] w-[45%] p-2 z-10 cursor-pointer block"
-        style={{
-          background: '#fdfbf7',
-          border: '1px solid #dcd0c0',
-          boxShadow: '1px 3px 6px rgba(0,0,0,0.1)',
-          transformOrigin: 'bottom left',
-        }}
-        initial={{ rotate: 12 }}
-        whileHover={{ rotate: 18, y: -10, x: 5, zIndex: 30 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      >
-        <div className="w-full h-full border border-dashed border-[#e0d6c8] py-2 flex items-center justify-center relative bg-[#faf7f0]">
-          <div className="font-hand font-bold text-sm sm:text-base text-[#5a4a3a] text-center leading-tight flex flex-col items-center">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97757" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mb-1">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            grab my<br />resume (pdf)
-          </div>
-          {/* Folded corner illusion */}
-          <div className="absolute top-0 right-0 border-b-[12px] border-l-[12px] border-b-[#e8dfd0] border-l-transparent w-0 h-0" style={{ boxShadow: '-1px 1px 2px rgba(0,0,0,0.1)' }} />
-        </div>
-      </motion.a>
-
-      {/* --- BUSINESS CARD / SOCIALS --- */}
-
 
     </div>
   )

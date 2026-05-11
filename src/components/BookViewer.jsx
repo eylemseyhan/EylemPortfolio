@@ -98,10 +98,10 @@ export default function BookViewer() {
             <RetroMP3Player />
             {/* Visual cue to click */}
             <motion.div
-              className="absolute -bottom-10 left-8 pointer-events-none flex flex-col items-center"
+              className="absolute -bottom-10 left-15 pointer-events-none flex flex-col items-center"
               animate={{ x: [-4, 4, -4] }}
               transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-              style={{ transform: 'rotateZ(10deg)' }}
+              style={{ transform: 'scaleX(-1)' }}
             >
               <span className="font-hand text-white text-base font-bold whitespace-nowrap" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.4)' }}>click for vibes!</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ transform: 'rotate(-40deg)' }}>
@@ -115,6 +115,20 @@ export default function BookViewer() {
         {currentIdx === 0 && (
           <div className="absolute top-[49%] left-[11%] hidden lg:block" style={{ transform: 'rotate(-12deg)', zIndex: 55 }}>
             <VintageStampSVG />
+          </div>
+        )}
+
+        {/* Napkin Scribble - right side, outside DeskEnvironment */}
+        {currentIdx === 0 && (
+          <div className="absolute top-[45%] right-[50%] hidden lg:block" style={{ transform: 'rotate(8deg)', zIndex: 45 }}>
+            <NapkinScribbleSVG />
+          </div>
+        )}
+
+        {/* USB Hub - right side, below napkin */}
+        {currentIdx === 0 && (
+          <div className="absolute top-[65%] right-[76%] hidden lg:block" style={{ transform: 'rotate(-4deg)', zIndex: 45 }}>
+            <UsbHubSVG />
           </div>
         )}
 
@@ -155,7 +169,7 @@ export default function BookViewer() {
             animate={{ x: [0, -10, 0] }}
             transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
           >
-            <span className="font-caveat text-[#7a6a5a] text-xl">drag to peel</span>
+
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M15 18L9 12L15 6" stroke="#7a6a5a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -238,7 +252,7 @@ function DeskEnvironment({ currentIdx }) {
       <div className="relative w-full h-full max-w-[1200px] mx-auto">
 
         {/* Coffee Cup with Steam (top-left) */}
-        <div className="absolute top-[8%] left-[2%] rotate-[-15deg]">
+        <div className="absolute top-[8%] left-[3%] rotate-[-15deg]">
           <CoffeeRing />
           <div className="absolute top-2 left-3">
             <CoffeeMug />
@@ -256,14 +270,11 @@ function DeskEnvironment({ currentIdx }) {
         <div className="absolute top-[18%] left-[25%] rotate-[14deg]">
           <div className="paper-scrap p-4 w-44 shadow-2xl flex flex-col items-center" style={{ background: '#fce4ec', filter: 'drop-shadow(6px 12px 10px rgba(0,0,0,0.3))' }}>
             <div className="absolute -top-3 tape tape-stripes w-14 h-6 rotate-[-8deg]" />
-            <span className="font-hand text-3xl font-bold text-pink-900 mt-2 text-center leading-tight">don't forget<br />to commit!</span>
+            <span className="font-hand text-3xl font-bold text-pink-500 mt-2 text-center leading-tight">don't forget<br />to commit!</span>
           </div>
         </div>
 
-        {/* Napkin Scribble - bottom right desk area */}
-        <div className="absolute bottom-[12%] right-[10%] rotate-[10deg]">
-          <NapkinScribbleSVG />
-        </div>
+        {/* Napkin and USB moved outside DeskEnvironment */}
 
         {/* Ray-Ban Sunglasses */}
         <div className="absolute top-[62%] left-[20%] rotate-[-12deg]">
@@ -271,12 +282,12 @@ function DeskEnvironment({ currentIdx }) {
         </div>
 
         {/* Fineliner Pen */}
-        <div className="absolute bottom-[20%] left-[30%] rotate-[-45deg]">
+        <div className="absolute bottom-[20%] left-[30%] rotate-[-70deg]">
           <FinelinerSVG />
         </div>
 
         {/* AirPods Case */}
-        <div className="absolute bottom-[20%] left-[10%] rotate-[25deg]">
+        <div className="absolute bottom-[45%] left-[20%] rotate-[25deg]">
           <AirPodsSVG />
         </div>
         {/* Scattered Paperclips */}
@@ -289,9 +300,55 @@ function DeskEnvironment({ currentIdx }) {
 }
 
 /* --- SVG ASSETS --- */
+function UsbHubSVG() {
+  return (
+    <svg width="240" height="160" viewBox="0 0 150 100" style={{ filter: 'drop-shadow(4px 8px 6px rgba(0,0,0,0.3))' }}>
+      {/* Hub body */}
+      <rect x="5" y="30" width="90" height="32" rx="7" fill="#2d3748" stroke="#1a202c" strokeWidth="2" />
+      {/* Glossy stripe */}
+      <rect x="7" y="31" width="86" height="10" rx="5" fill="rgba(255,255,255,0.07)" />
+
+      {/* USB ports x4 */}
+      <rect x="14" y="38" width="12" height="9" rx="2" fill="#0d1117" stroke="#4a5568" strokeWidth="1" />
+      <rect x="16" y="40" width="8" height="4" rx="0.5" fill="#4a5568" />
+      <rect x="32" y="38" width="12" height="9" rx="2" fill="#0d1117" stroke="#4a5568" strokeWidth="1" />
+      <rect x="34" y="40" width="8" height="4" rx="0.5" fill="#4a5568" />
+      <rect x="50" y="38" width="12" height="9" rx="2" fill="#0d1117" stroke="#4a5568" strokeWidth="1" />
+      <rect x="52" y="40" width="8" height="4" rx="0.5" fill="#4a5568" />
+      <rect x="68" y="38" width="12" height="9" rx="2" fill="#0d1117" stroke="#4a5568" strokeWidth="1" />
+      <rect x="70" y="40" width="8" height="4" rx="0.5" fill="#4a5568" />
+
+      {/* LEDs - clearly visible */}
+      <circle cx="86" cy="35" r="3" fill="#22c55e" style={{ filter: 'drop-shadow(0 0 3px #22c55e)' }} />
+      <circle cx="93" cy="35" r="3" fill="#3b82f6" style={{ filter: 'drop-shadow(0 0 3px #3b82f6)' }} />
+
+      {/* USB 3.0 label */}
+
+
+      {/* Main power cable (thick, dark) going left */}
+      <path d="M 5 46 C -10 46 -15 70 -5 80" fill="none" stroke="#1a1a1a" strokeWidth="7" strokeLinecap="round" />
+      <path d="M 5 46 C -10 46 -15 70 -5 80" fill="none" stroke="#374151" strokeWidth="4" strokeLinecap="round" />
+
+      {/* Red cable - tangled */}
+      <path d="M 95 40 C 115 30 140 45 135 62 C 130 75 112 68 118 55 C 124 42 142 38 148 55" fill="none" stroke="#ef4444" strokeWidth="4" strokeLinecap="round" />
+
+      {/* Blue cable - looping */}
+      <path d="M 95 46 C 118 38 145 55 140 70 C 136 82 118 76 124 63" fill="none" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
+
+      {/* Yellow cable - shorter */}
+      <path d="M 95 52 C 112 48 130 60 128 72 Q 125 80 115 78" fill="none" stroke="#eab308" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
+
+      {/* USB-A connector on red cable end */}
+      <rect x="143" y="51" width="9" height="7" rx="1.5" fill="#94a3b8" stroke="#64748b" strokeWidth="1" />
+      <rect x="144.5" y="53" width="6" height="3" rx="0.5" fill="#1e293b" />
+    </svg>
+  )
+}
+
+
 function CoffeeMug() {
   return (
-    <svg width="180" height="180" viewBox="0 0 100 100" style={{ filter: 'drop-shadow(15px 25px 12px rgba(0,0,0,0.4))' }}>
+    <svg width="220" height="220" viewBox="0 0 100 100" style={{ filter: 'drop-shadow(15px 25px 12px rgba(0,0,0,0.4))' }}>
       {/* Handle */}
       <path d="M 70 30 C 95 30 95 70 70 70" fill="none" stroke="#fdfbf7" strokeWidth="12" strokeLinecap="round" />
       {/* Cup body */}
@@ -320,7 +377,7 @@ function CoffeeRing() {
 
 function RaybanSVG() {
   return (
-    <svg width="280" height="150" viewBox="0 0 160 90" style={{ filter: 'drop-shadow(12px 18px 10px rgba(0,0,0,0.4))' }}>
+    <svg width="300" height="170" viewBox="0 0 160 90" style={{ filter: 'drop-shadow(12px 18px 10px rgba(0,0,0,0.4))' }}>
       <g transform="translate(10, 10)">
         <path d="M 10 15 L 55 5" stroke="#111" strokeWidth="8" strokeLinecap="round" opacity="0.9" />
         <path d="M 130 15 L 85 5" stroke="#111" strokeWidth="8" strokeLinecap="round" opacity="0.9" />

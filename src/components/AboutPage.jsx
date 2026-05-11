@@ -71,17 +71,6 @@ export default function AboutPage() {
         </p>
       </motion.div>
 
-      {/* Micro post-it 2: Soft Pink */}
-      <motion.div
-        className="absolute bottom-40 left-48 hidden xl:block p-3 w-36 sticky-note paper-scrap"
-        style={{ background: '#FFD6E0', transform: 'rotate(-4deg)', boxShadow: '2px 4px 8px rgba(0,0,0,0.06)' }}
-        whileHover={{ rotate: -2, scale: 1.05 }}
-      >
-        <div className="absolute -top-2 left-4 tape w-8 h-3 rotate-[8deg]" />
-        <p className="font-hand sticky-note-text text-lg text-[#6a4a50] leading-tight text-center">
-          more logs, more peace 🪵
-        </p>
-      </motion.div>
 
       {/* Pencil — leans in lower-left margin */}
       <motion.img
@@ -271,7 +260,7 @@ export default function AboutPage() {
                 <span className="ml-2">〰️</span>
               </div>
 
-              <h3 className="font-hand text-2xl text-[#3d2b1f] mb-4 flex items-center gap-2">
+              <h3 className="font-hand text-2xl text-[#3d2b1f] mb-6 flex items-center gap-2">
                 quick stack
                 <svg width="40" height="16" viewBox="0 0 40 16">
                   <path d="M2 10 Q15 4 35 10" stroke="#c8b8a0" strokeWidth="2" fill="none" strokeLinecap="round" />
@@ -282,12 +271,10 @@ export default function AboutPage() {
                   { label: '.NET Core', bg: '#C8F0DC' },
                   { label: 'C#', bg: '#C8F0DC' },
                   { label: 'RabbitMQ', bg: '#C8F0DC' },
-                  { label: 'CQRS', bg: '#C8F0DC' },
                   { label: 'PostgreSQL', bg: '#FFD9C0' },
                   { label: 'ElasticSearch', bg: '#FFD9C0' },
                   { label: 'React', bg: '#E0D4F7' },
                   { label: 'Python', bg: '#C5E8F7' },
-                  { label: 'LangChain', bg: '#C5E8F7' },
                   { label: 'Swift', bg: '#FFD6E0' },
                 ].map((skill, i) => (
                   <motion.div
@@ -313,13 +300,8 @@ export default function AboutPage() {
             {/* Hand-drawn arrow to skills section */}
             <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={5}
               className="mt-6 flex items-center gap-2">
-              <svg width="60" height="30" viewBox="0 0 60 30">
-                <path d="M5 10 Q30 5 50 20" stroke="#9a8a7a" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeDasharray="4 3" />
-                <path d="M44 16 L52 22 L46 26" stroke="#9a8a7a" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span className="font-hand text-[#9a8a7a] text-sm" style={{ transform: 'rotate(-1deg)' }}>
-                more skills below ↓
-              </span>
+
+
             </motion.div>
           </div>
         </div>
