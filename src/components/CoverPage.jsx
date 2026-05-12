@@ -195,107 +195,22 @@ function PolaroidCamera({ style }) {
   )
 }
 
+// ... (Önceki import ve ana komponent yapısı aynı kalacak)
+
+/* --- GÜNCELLEMİŞ EDİRNE PULU KOMPONENTİ --- */
+
 function EdirneMap({ style }) {
   return (
-    <div className="absolute z-10" style={{ width: 180, height: 160, ...style }}>
-      {/* Tapes */}
-      <div className="absolute top-0 -right-2 tape tape-pink w-12 h-5 rotate-[-15deg] z-30 pointer-events-none" />
-      <div className="absolute bottom-1 -left-2 tape tape-mint w-10 h-4 rotate-[10deg] z-30 pointer-events-none" />
-
-      {/* Stamp SVG Background & Illustration */}
-      <svg width="180" height="160" className="absolute inset-0 z-0 pointer-events-none" style={{ filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.15))' }}>
-        <defs>
-          <mask id="stamp-mask-edirne">
-            <rect x="0" y="0" width="180" height="160" fill="white" />
-            <rect x="0" y="0" width="180" height="160" fill="none" stroke="black" strokeWidth="12" strokeDasharray="0 14.5" strokeLinecap="round" />
-          </mask>
-          <clipPath id="stamp-inner-clip">
-            <rect x="12" y="12" width="156" height="136" />
-          </clipPath>
-        </defs>
-
-        {/* Stamp Paper Base */}
-        <rect x="0" y="0" width="180" height="160" fill="#fdfaf3" mask="url(#stamp-mask-edirne)" />
-
-        {/* --- Inner Vector Illustration --- */}
-        <g clipPath="url(#stamp-inner-clip)">
-          {/* Sky */}
-          <rect x="12" y="12" width="156" height="136" fill="#e0f2fe" />
-
-          {/* Sun */}
-          <circle cx="140" cy="35" r="14" fill="#fde047" />
-          <circle cx="140" cy="35" r="18" fill="#fef08a" opacity="0.5" />
-
-          {/* Background hills */}
-          <path d="M 12 70 Q 50 45 100 70 T 170 65 L 170 150 L 12 150 Z" fill="#dcfce3" />
-          <path d="M 12 85 Q 70 60 120 85 T 170 80 L 170 150 L 12 150 Z" fill="#bbf7d0" />
-
-          {/* Selimiye Mosque Silhouette */}
-          <g fill="#94a3b8" opacity="0.7">
-            {/* Minarets */}
-            <rect x="68" y="45" width="2" height="30" />
-            <rect x="88" y="45" width="2" height="30" />
-            <rect x="73" y="50" width="1.5" height="25" />
-            <rect x="83.5" y="50" width="1.5" height="25" />
-            {/* Dome */}
-            <path d="M 70 75 Q 79 55 88 75 Z" />
-            <rect x="70" y="75" width="18" height="12" />
-          </g>
-
-          {/* River Surface */}
-          <rect x="12" y="105" width="156" height="45" fill="#60a5fa" />
-
-          {/* River Waves */}
-          <path d="M 20 115 Q 30 112 40 115 T 60 115 T 80 115 T 100 115 T 120 115" fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
-          <path d="M 50 125 Q 60 122 70 125 T 90 125 T 110 125 T 130 125 T 150 125" fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
-          <path d="M 15 135 Q 25 132 35 135 T 55 135 T 75 135 T 95 135 T 115 135" fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
-
-          {/* Bridge (Meriç Köprüsü) */}
-          <rect x="12" y="90" width="156" height="15" fill="#e5e5e5" />
-          <path d="M 12 92 L 168 92" stroke="#d4d4d8" strokeWidth="1.5" />
-          <path d="M 12 105 L 168 105" stroke="#a1a1aa" strokeWidth="1" />
-
-          {/* Bridge Arches (Shadowed water under the bridge) */}
-          <path d="M 25 105 A 12 10 0 0 0 49 105 Z" fill="#3b82f6" />
-          <path d="M 60 105 A 12 10 0 0 0 84 105 Z" fill="#3b82f6" />
-          <path d="M 95 105 A 12 10 0 0 0 119 105 Z" fill="#3b82f6" />
-          <path d="M 130 105 A 12 10 0 0 0 154 105 Z" fill="#3b82f6" />
-
-          {/* Arch outlines */}
-          <path d="M 25 105 A 12 10 0 0 0 49 105" fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
-          <path d="M 60 105 A 12 10 0 0 0 84 105" fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
-          <path d="M 95 105 A 12 10 0 0 0 119 105" fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
-          <path d="M 130 105 A 12 10 0 0 0 154 105" fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
-
-          {/* Text: edirne */}
-          <text x="89" y="142" fontFamily="'Caveat', cursive" fontSize="24" fontWeight="bold" fill="#1e3a8a" textAnchor="middle" style={{ filter: 'drop-shadow(1px 1px 0 rgba(255,255,255,0.7))' }}>edirne ♥</text>
-        </g>
-
-        {/* Inner Frame Border */}
-        <rect x="12" y="12" width="156" height="136" fill="none" stroke="#d1d5db" strokeWidth="2" />
-      </svg>
-
-      {/* Postmark Overlay (Damga) */}
-      <svg className="absolute inset-0 z-20 pointer-events-none opacity-60" width="180" height="160">
-        <g stroke="#1a1a1a" fill="none" opacity="0.6">
-          <circle cx="140" cy="45" r="22" strokeWidth="1.5" />
-          <circle cx="140" cy="45" r="20" strokeWidth="1" />
-          <text x="140" y="40" fontFamily="sans-serif" fontSize="6" fontWeight="bold" fill="#1a1a1a" textAnchor="middle" stroke="none">EDİRNE</text>
-          <text x="140" y="53" fontFamily="sans-serif" fontSize="6" fontWeight="bold" fill="#1a1a1a" textAnchor="middle" stroke="none">19 05 26</text>
-
-          <path d="M 140 45 Q 155 35 170 45 T 200 45" strokeWidth="2" />
-          <path d="M 140 40 Q 155 30 170 40 T 200 40" strokeWidth="2" />
-          <path d="M 140 50 Q 155 40 170 50 T 200 50" strokeWidth="2" />
-        </g>
-      </svg>
-
-      {/* Stamp Values (10 Kuruş, TÜRKİYE) */}
-      <div className="absolute bottom-4 left-4 z-20 pointer-events-none flex flex-col">
-        <span className="font-serif text-xl font-bold text-[#d97757] leading-none" style={{ textShadow: '1px 1px 0 rgba(255,255,255,0.9)' }}>10</span>
-      </div>
-      <div className="absolute top-4 left-4 z-20 pointer-events-none">
-        <span className="font-sans text-[8px] font-bold text-[#5a4a3a] tracking-widest" style={{ textShadow: '1px 1px 0 rgba(255,255,255,0.9)' }}>TÜRKİYE</span>
-      </div>
+    <div className="absolute z-10" style={{ width: 220, height: 220, ...style }}>
+      <img
+        src="/edirne-stamp.png"
+        alt="Edirne stamp"
+        className="w-full h-full pointer-events-none"
+        style={{
+          objectFit: 'contain',
+          filter: 'drop-shadow(4px 6px 10px rgba(0,0,0,0.3))',
+        }}
+      />
     </div>
   )
 }

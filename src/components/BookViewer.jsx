@@ -303,7 +303,7 @@ function DeskEnvironment({ currentIdx }) {
           animate={{ y: [0, 2, 0], rotate: [25, 26, 25] }} transition={{ repeat: Infinity, duration: 6.5, ease: 'easeInOut' }}>
           <AirPodsSVG />
         </motion.div>
-        
+
         {/* Scattered Paperclips */}
         <motion.div className="absolute top-[65%] left-[38%]" animate={{ rotate: [45, 47, 45] }} transition={{ repeat: Infinity, duration: 10 }}>
           <PaperclipSVG style={{}} />
@@ -392,25 +392,25 @@ function CoffeeMug() {
           <feComposite in="coloredNoise" in2="SourceGraphic" operator="in" />
         </filter>
       </defs>
-      
+
       {/* Handle with shadow */}
       <path d="M 70 30 C 95 30 95 70 70 70" fill="none" stroke="#e8dfce" strokeWidth="12" strokeLinecap="round" style={{ filter: 'drop-shadow(0 12px 10px rgba(0,0,0,0.25))' }} />
       <path d="M 70 30 C 95 30 95 70 70 70" fill="none" stroke="url(#ceramic-grad)" strokeWidth="12" strokeLinecap="round" />
-      
+
       {/* Cup body */}
       <circle cx="50" cy="50" r="40" fill="url(#ceramic-grad)" stroke="#d4c9b8" strokeWidth="1" />
       <circle cx="50" cy="50" r="39" fill="url(#cup-inner)" />
-      
+
       {/* Coffee liquid */}
       <circle cx="50" cy="50" r="34" fill="url(#coffee-grad)" />
-      
+
       {/* Coffee oil variation & noise overlay */}
       <circle cx="50" cy="50" r="34" fill="#000" style={{ filter: 'url(#coffee-noise)', mixBlendMode: 'multiply' }} opacity="0.6" />
-      
+
       {/* Foam / Crema swirls */}
       <path d="M 25 45 Q 40 25 60 40 T 75 55" stroke="#996336" strokeWidth="3" fill="none" opacity="0.5" strokeLinecap="round" style={{ filter: 'blur(1px)' }} />
       <path d="M 35 60 Q 50 80 65 50" stroke="#b07d4f" strokeWidth="2" fill="none" opacity="0.4" strokeLinecap="round" style={{ filter: 'blur(0.5px)' }} />
-      
+
       {/* Small random crema spots */}
       <circle cx="45" cy="35" r="1.5" fill="#a67b4c" opacity="0.6" style={{ filter: 'blur(0.5px)' }} />
       <circle cx="65" cy="45" r="1" fill="#b07d4f" opacity="0.5" />
@@ -418,11 +418,11 @@ function CoffeeMug() {
 
       {/* Coffee meniscus ring */}
       <circle cx="50" cy="50" r="33.5" fill="none" stroke="#4a2105" strokeWidth="1.5" opacity="0.9" />
-      
+
       {/* Surface reflection (gloss) */}
       <path d="M 22 40 A 28 28 0 0 1 40 22" stroke="rgba(255,255,255,0.15)" strokeWidth="4" fill="none" strokeLinecap="round" style={{ filter: 'blur(1px)' }} />
       <path d="M 24 40 A 26 26 0 0 1 40 24" stroke="rgba(255,255,255,0.25)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-      
+
       {/* Cup imperfections */}
       {/* tiny stain on edge */}
       <path d="M 17 42 Q 15 45 18 48" stroke="#4a2105" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.4" />
@@ -464,32 +464,32 @@ function RaybanSVG() {
         {/* Temples (Kollar) */}
         <path d="M 10 15 L 55 5" stroke="#111" strokeWidth="8" strokeLinecap="round" opacity="0.85" />
         <path d="M 130 15 L 85 5" stroke="#111" strokeWidth="8" strokeLinecap="round" opacity="0.85" />
-        
+
         {/* Top bar */}
         <path d="M 5 20 Q 35 18 65 22 Q 70 23 75 22 Q 105 18 135 20" stroke="#181818" strokeWidth="12" fill="none" strokeLinecap="round" />
-        
+
         {/* Lenses */}
         {/* Left Lens Base */}
         <path d="M 10 22 L 15 50 Q 25 58 45 55 Q 55 50 60 25 Z" fill="rgba(20,22,25,0.75)" stroke="#1a1a1a" strokeWidth="6" strokeLinejoin="round" style={{ backdropFilter: 'blur(1px)' }} />
         {/* Left Lens Glare */}
         <path d="M 10 22 L 15 50 Q 25 58 45 55 Q 55 50 60 25 Z" fill="url(#lens-glare)" />
-        
+
         {/* Right Lens Base */}
         <path d="M 130 22 L 125 50 Q 115 58 95 55 Q 85 50 80 25 Z" fill="rgba(20,22,25,0.75)" stroke="#1a1a1a" strokeWidth="6" strokeLinejoin="round" style={{ backdropFilter: 'blur(1px)' }} />
         {/* Right Lens Glare */}
         <path d="M 130 22 L 125 50 Q 115 58 95 55 Q 85 50 80 25 Z" fill="url(#lens-glare)" />
-        
+
         {/* Bridge */}
         <path d="M 60 25 Q 70 20 80 25" stroke="#1a1a1a" strokeWidth="10" fill="none" />
-        
+
         {/* Nose pads */}
         <ellipse cx="56" cy="34" rx="3" ry="5" fill="#e5e7eb" opacity="0.7" transform="rotate(-15 56 34)" />
         <ellipse cx="84" cy="34" rx="3" ry="5" fill="#e5e7eb" opacity="0.7" transform="rotate(15 84 34)" />
-        
+
         {/* Frame Micro Highlights */}
         <path d="M 12 20 Q 35 18 55 22" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5" fill="none" />
         <path d="M 85 22 Q 105 18 128 20" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5" fill="none" />
-        
+
         {/* Lens edge dust / tiny smudges */}
         <circle cx="20" cy="45" r="1.5" fill="rgba(255,255,255,0.15)" style={{ filter: 'blur(1px)' }} />
         <circle cx="120" cy="40" r="2" fill="rgba(255,255,255,0.1)" style={{ filter: 'blur(1px)' }} />
