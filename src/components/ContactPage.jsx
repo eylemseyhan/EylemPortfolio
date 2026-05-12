@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 
@@ -16,22 +16,23 @@ export default function ContactPage() {
   const [sending, setSending] = useState(false)
   const [form, setForm] = useState({ name: '', email: '', message: '' })
 
-  const handleChange = (e) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
-  }
+  const stopProp = (e) => e.stopPropagation()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setSending(true)
+    const formData = new FormData(e.target)
+    const data = Object.fromEntries(formData.entries())
+    
     try {
       await emailjs.send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
-        { from_name: form.name, reply_to: form.email, message: form.message },
-        'YOUR_PUBLIC_KEY'
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        { name: data.name, email: data.email, message: data.message },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       setStatus('success')
-      setForm({ name: '', email: '', message: '' })
+      e.target.reset()
     } catch {
       setStatus('error')
     } finally {
@@ -148,6 +149,10 @@ export default function ContactPage() {
           <motion.div
             variants={fadeUp} initial="hidden" animate="visible" custom={1}
             className="flex-1"
+            onPointerDown={stopProp}
+            onPointerMove={stopProp}
+            onTouchStart={stopProp}
+            onTouchMove={stopProp}
           >
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
               {/* Name */}
@@ -159,8 +164,6 @@ export default function ContactPage() {
                 <input
                   type="text"
                   name="name"
-                  value={form.name}
-                  onChange={handleChange}
                   required
                   placeholder="what should I call you?"
                   className="w-full font-nunito text-base text-[#3d2b1f] px-4 py-3 rounded-lg outline-none transition-all"
@@ -183,8 +186,6 @@ export default function ContactPage() {
                 <input
                   type="email"
                   name="email"
-                  value={form.email}
-                  onChange={handleChange}
                   required
                   placeholder="so I can write back :)"
                   className="w-full font-nunito text-base text-[#3d2b1f] px-4 py-3 rounded-lg outline-none"
@@ -206,8 +207,6 @@ export default function ContactPage() {
                 </label>
                 <textarea
                   name="message"
-                  value={form.message}
-                  onChange={handleChange}
                   required
                   rows={6}
                   placeholder="say hello, talk code, ask about CQRS... anything goes!"

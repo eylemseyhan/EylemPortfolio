@@ -29,7 +29,7 @@ export default function Navigation({ activePage, onNavigate }) {
         className="font-hand text-xl font-bold text-[#3d2b1f] flex items-center gap-2"
       >
         <span>✎</span>
-        <span>Eylem's Sketchbook</span>
+        <span>Eylem's Portfolio</span>
       </motion.button>
 
       {/* Nav links */}

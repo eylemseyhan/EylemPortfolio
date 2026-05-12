@@ -36,7 +36,7 @@ export default function CoverPage() {
 
 
 
-        <motion.div className="absolute bottom-[28%] right-8 z-20"
+        <motion.div className="absolute bottom-[28%] right-12 z-20"
           animate={{ y: [0, -8, 0], rotate: [1, -2, 1] }}
           transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}>
           <PencilSVG />
@@ -64,6 +64,10 @@ export default function CoverPage() {
         <motion.span className="absolute bottom-32 right-12 text-pink-300 text-xl pointer-events-none"
           animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}>✧</motion.span>
 
+        {/* --- NEW TACTILE ELEMENTS --- */}
+        <TornTerminalPaper style={{ top: '12%', right: '14%', transform: 'rotate(7deg)' }} />
+
+
         {/* --- TITLE BLOCK --- */}
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20">
           <div className="relative">
@@ -71,12 +75,12 @@ export default function CoverPage() {
               style={{ textShadow: '3px 4px 0 rgba(0,0,0,0.2)' }}>
               Eylem's
             </h1>
-            <h1 className="font-sketch text-6xl sm:text-8xl font-bold text-amber-50 leading-tight"
+            <h1 className="font-sketch text-6xl sm:text-8xl font-bold text-amber-50 leading-tight pb-4"
               style={{ textShadow: '3px 4px 0 rgba(0,0,0,0.2)', transform: 'rotate(-2deg)' }}>
-              Sketchbook
+              Portfolio
             </h1>
             {/* Wavy underline */}
-            <svg width="280" height="24" viewBox="0 0 280 20" className="absolute -bottom-4 left-4">
+            <svg width="280" height="24" viewBox="0 0 280 20" className="absolute -bottom-4 left-10">
               <path d="M5 12 Q70 5 140 12 Q210 19 275 10" stroke="#fde68a" strokeWidth="4" fill="none"
                 strokeLinecap="round" style={{ filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.3))' }} />
             </svg>
@@ -86,6 +90,8 @@ export default function CoverPage() {
           <p className="font-hand text-[#faf7f2] text-xl sm:text-2xl mt-6 opacity-95" style={{ transform: 'rotate(1deg)' }}>
             a messy little timeline of my journey ✿
           </p>
+
+
 
           {/* --- STICKERS --- */}
           <div className="flex gap-4 mt-8">
@@ -116,6 +122,37 @@ export default function CoverPage() {
     </div>
   )
 }
+
+/* --- NEW TACTILE ELEMENTS --- */
+
+function TornTerminalPaper({ style }) {
+  return (
+    <div className="absolute z-10 pointer-events-auto" style={{ width: 150, height: 100, ...style }}>
+      {/* Tape */}
+      <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 tape tape-gray w-12 h-5 rotate-[-3deg] z-20" />
+
+      {/* Torn Paper background */}
+      <svg width="150" height="100" className="absolute inset-0 z-0" style={{ filter: 'drop-shadow(3px 4px 5px rgba(0,0,0,0.3))' }}>
+        <path d="M 5 5 L 145 2 Q 148 20 145 40 Q 148 60 146 95 Q 110 98 80 94 Q 40 98 5 95 Z" fill="#1e1e1e" />
+        {/* Torn edge effect at top */}
+        <path d="M 5 5 Q 15 2 25 6 T 45 4 T 65 6 T 85 3 T 105 5 T 125 3 L 145 2 L 145 15 L 5 15 Z" fill="#2d2d2d" />
+      </svg>
+
+      {/* Terminal Content */}
+      <div className="absolute inset-0 z-10 p-3 pt-5 pointer-events-none flex flex-col font-mono text-[9px] leading-tight text-green-400">
+        <div><span className="text-pink-500">~</span>$ git status</div>
+        <div className="text-gray-300 mt-1">On branch main</div>
+        <div className="text-gray-300">Your branch is up to date.</div>
+        <div className="mt-2 text-yellow-300">working tree clean</div>
+        <div className="mt-1 animate-pulse font-bold">_</div>
+      </div>
+    </div>
+  )
+}
+
+
+
+
 
 function ScrapPostIt({ text, color, tapeClass, style }) {
   return (
@@ -160,51 +197,104 @@ function PolaroidCamera({ style }) {
 
 function EdirneMap({ style }) {
   return (
-    <div className="absolute p-2 bg-[#f4e8d8] paper-scrap shadow-md z-10" style={{ width: 140, height: 115, ...style }}>
-      <div className="absolute top-1 -right-4 tape tape-pink w-12 h-5 rotate-[-15deg]" />
-      <div className="absolute bottom-2 -left-2 tape tape-mint w-10 h-4 rotate-[10deg]" />
-      <div className="w-full h-full border-2 border-dashed border-[#c0b0a0] flex flex-col items-center justify-center relative overflow-hidden">
-        <svg width="120" height="75" viewBox="0 0 120 75" fill="none">
-          {/* Background land */}
-          <rect width="120" height="75" fill="#e8d8b8" opacity="0.5" />
+    <div className="absolute z-10" style={{ width: 180, height: 160, ...style }}>
+      {/* Tapes */}
+      <div className="absolute top-0 -right-2 tape tape-pink w-12 h-5 rotate-[-15deg] z-30 pointer-events-none" />
+      <div className="absolute bottom-1 -left-2 tape tape-mint w-10 h-4 rotate-[10deg] z-30 pointer-events-none" />
 
-          {/* Greece border (left) - blue dashed */}
-          <line x1="20" y1="0" x2="20" y2="75" stroke="#60a5fa" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.8" />
-          {/* Bulgaria border (top) - orange dashed */}
-          <line x1="0" y1="18" x2="120" y2="18" stroke="#fb923c" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.8" />
+      {/* Stamp SVG Background & Illustration */}
+      <svg width="180" height="160" className="absolute inset-0 z-0 pointer-events-none" style={{ filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.15))' }}>
+        <defs>
+          <mask id="stamp-mask-edirne">
+            <rect x="0" y="0" width="180" height="160" fill="white" />
+            <rect x="0" y="0" width="180" height="160" fill="none" stroke="black" strokeWidth="12" strokeDasharray="0 14.5" strokeLinecap="round" />
+          </mask>
+          <clipPath id="stamp-inner-clip">
+            <rect x="12" y="12" width="156" height="136" />
+          </clipPath>
+        </defs>
 
-          {/* Meriç (Maritsa) river */}
-          <path d="M20 0 Q30 20 38 38 Q46 55 40 75" stroke="#3b82f6" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.75" />
-          {/* Tunca river */}
-          <path d="M60 18 Q55 30 52 45 Q49 58 40 75" stroke="#60a5fa" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.65" />
+        {/* Stamp Paper Base */}
+        <rect x="0" y="0" width="180" height="160" fill="#fdfaf3" mask="url(#stamp-mask-edirne)" />
 
-          {/* Edirne city area */}
-          <ellipse cx="60" cy="45" rx="12" ry="8" fill="#d4b896" stroke="#92400e" strokeWidth="1" opacity="0.5" />
+        {/* --- Inner Vector Illustration --- */}
+        <g clipPath="url(#stamp-inner-clip)">
+          {/* Sky */}
+          <rect x="12" y="12" width="156" height="136" fill="#e0f2fe" />
 
-          {/* Selimiye Mosque silhouette */}
-          {/* Main dome */}
-          <ellipse cx="60" cy="40" rx="7" ry="5" fill="#7a5a38" opacity="0.8" />
-          {/* Body */}
-          <rect x="55" y="40" width="10" height="7" fill="#7a5a38" opacity="0.7" />
-          {/* 4 minarets */}
-          <rect x="52" y="32" width="2" height="12" fill="#7a5a38" opacity="0.8" />
-          <rect x="66" y="32" width="2" height="12" fill="#7a5a38" opacity="0.8" />
-          <rect x="56" y="34" width="1.5" height="8" fill="#7a5a38" opacity="0.6" />
-          <rect x="62.5" y="34" width="1.5" height="8" fill="#7a5a38" opacity="0.6" />
-          {/* Minaret tips */}
-          <polygon points="53,32 53.5,29 54,32" fill="#92400e" />
-          <polygon points="67,32 67.5,29 68,32" fill="#92400e" />
+          {/* Sun */}
+          <circle cx="140" cy="35" r="14" fill="#fde047" />
+          <circle cx="140" cy="35" r="18" fill="#fef08a" opacity="0.5" />
 
-          {/* Location pin */}
-          <circle cx="60" cy="45" r="4.5" fill="#ef4444" />
-          <line x1="60" y1="49" x2="60" y2="56" stroke="#ef4444" strokeWidth="2" />
-          <circle cx="60" cy="45" r="2" fill="white" />
+          {/* Background hills */}
+          <path d="M 12 70 Q 50 45 100 70 T 170 65 L 170 150 L 12 150 Z" fill="#dcfce3" />
+          <path d="M 12 85 Q 70 60 120 85 T 170 80 L 170 150 L 12 150 Z" fill="#bbf7d0" />
 
-          {/* Border labels */}
-          <text x="2" y="14" fontSize="5" fill="#60a5fa" fontFamily="sans-serif" fontWeight="bold">GR</text>
-          <text x="2" y="27" fontSize="5" fill="#fb923c" fontFamily="sans-serif" fontWeight="bold">BG</text>
-        </svg>
-        <span className="font-hand text-sm font-bold text-[#7a5a38] absolute bottom-1 right-2">edirne ♥</span>
+          {/* Selimiye Mosque Silhouette */}
+          <g fill="#94a3b8" opacity="0.7">
+            {/* Minarets */}
+            <rect x="68" y="45" width="2" height="30" />
+            <rect x="88" y="45" width="2" height="30" />
+            <rect x="73" y="50" width="1.5" height="25" />
+            <rect x="83.5" y="50" width="1.5" height="25" />
+            {/* Dome */}
+            <path d="M 70 75 Q 79 55 88 75 Z" />
+            <rect x="70" y="75" width="18" height="12" />
+          </g>
+
+          {/* River Surface */}
+          <rect x="12" y="105" width="156" height="45" fill="#60a5fa" />
+
+          {/* River Waves */}
+          <path d="M 20 115 Q 30 112 40 115 T 60 115 T 80 115 T 100 115 T 120 115" fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
+          <path d="M 50 125 Q 60 122 70 125 T 90 125 T 110 125 T 130 125 T 150 125" fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
+          <path d="M 15 135 Q 25 132 35 135 T 55 135 T 75 135 T 95 135 T 115 135" fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
+
+          {/* Bridge (Meriç Köprüsü) */}
+          <rect x="12" y="90" width="156" height="15" fill="#e5e5e5" />
+          <path d="M 12 92 L 168 92" stroke="#d4d4d8" strokeWidth="1.5" />
+          <path d="M 12 105 L 168 105" stroke="#a1a1aa" strokeWidth="1" />
+
+          {/* Bridge Arches (Shadowed water under the bridge) */}
+          <path d="M 25 105 A 12 10 0 0 0 49 105 Z" fill="#3b82f6" />
+          <path d="M 60 105 A 12 10 0 0 0 84 105 Z" fill="#3b82f6" />
+          <path d="M 95 105 A 12 10 0 0 0 119 105 Z" fill="#3b82f6" />
+          <path d="M 130 105 A 12 10 0 0 0 154 105 Z" fill="#3b82f6" />
+
+          {/* Arch outlines */}
+          <path d="M 25 105 A 12 10 0 0 0 49 105" fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
+          <path d="M 60 105 A 12 10 0 0 0 84 105" fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
+          <path d="M 95 105 A 12 10 0 0 0 119 105" fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
+          <path d="M 130 105 A 12 10 0 0 0 154 105" fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
+
+          {/* Text: edirne */}
+          <text x="89" y="142" fontFamily="'Caveat', cursive" fontSize="24" fontWeight="bold" fill="#1e3a8a" textAnchor="middle" style={{ filter: 'drop-shadow(1px 1px 0 rgba(255,255,255,0.7))' }}>edirne ♥</text>
+        </g>
+
+        {/* Inner Frame Border */}
+        <rect x="12" y="12" width="156" height="136" fill="none" stroke="#d1d5db" strokeWidth="2" />
+      </svg>
+
+      {/* Postmark Overlay (Damga) */}
+      <svg className="absolute inset-0 z-20 pointer-events-none opacity-60" width="180" height="160">
+        <g stroke="#1a1a1a" fill="none" opacity="0.6">
+          <circle cx="140" cy="45" r="22" strokeWidth="1.5" />
+          <circle cx="140" cy="45" r="20" strokeWidth="1" />
+          <text x="140" y="40" fontFamily="sans-serif" fontSize="6" fontWeight="bold" fill="#1a1a1a" textAnchor="middle" stroke="none">EDİRNE</text>
+          <text x="140" y="53" fontFamily="sans-serif" fontSize="6" fontWeight="bold" fill="#1a1a1a" textAnchor="middle" stroke="none">19 05 26</text>
+
+          <path d="M 140 45 Q 155 35 170 45 T 200 45" strokeWidth="2" />
+          <path d="M 140 40 Q 155 30 170 40 T 200 40" strokeWidth="2" />
+          <path d="M 140 50 Q 155 40 170 50 T 200 50" strokeWidth="2" />
+        </g>
+      </svg>
+
+      {/* Stamp Values (10 Kuruş, TÜRKİYE) */}
+      <div className="absolute bottom-4 left-4 z-20 pointer-events-none flex flex-col">
+        <span className="font-serif text-xl font-bold text-[#d97757] leading-none" style={{ textShadow: '1px 1px 0 rgba(255,255,255,0.9)' }}>10</span>
+      </div>
+      <div className="absolute top-4 left-4 z-20 pointer-events-none">
+        <span className="font-sans text-[8px] font-bold text-[#5a4a3a] tracking-widest" style={{ textShadow: '1px 1px 0 rgba(255,255,255,0.9)' }}>TÜRKİYE</span>
       </div>
     </div>
   )
