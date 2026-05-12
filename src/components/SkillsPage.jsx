@@ -7,7 +7,7 @@ const skillCategories = [
     color: 'mint',
     bg: '#C8F0DC',
     border: '#8fd4aa',
-    skills: ['C#', '.NET Core', '.NET MVC', 'CQRS', 'Event-Driven Arch.', 'RabbitMQ', 'Entity Framework', 'REST API'],
+    skills: ['C#', '.NET Core', '.NET MVC', 'RabbitMQ', 'Entity Framework', 'REST API'],
   },
   {
     label: 'Frontend',
@@ -15,7 +15,7 @@ const skillCategories = [
     color: 'lavender',
     bg: '#E0D4F7',
     border: '#b8a8e0',
-    skills: ['React', 'HTML', 'CSS', 'Bootstrap', 'jQuery'],
+    skills: ['React', 'HTML', 'CSS', 'Bootstrap'],
   },
   {
     label: 'Databases',
@@ -31,7 +31,7 @@ const skillCategories = [
     color: 'babyblue',
     bg: '#C5E8F7',
     border: '#90c8e8',
-    skills: ['LangChain', 'OpenAI API', 'Vector Indexing', 'Prompt Engineering'],
+    skills: ['LangChain'],
   },
   {
     label: 'Tools & Infra',

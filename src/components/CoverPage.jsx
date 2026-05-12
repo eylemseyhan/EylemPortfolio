@@ -29,22 +29,14 @@ export default function CoverPage() {
       {/* Content Canvas */}
       <div className="absolute inset-0 pl-16 pr-8 py-12">
 
-        {/* --- TIMELINE POST-ITS & SCRAPS --- */}
-        <ScrapPostIt text="to-do: fix bugs 🐛" color="#FFD9C0" tapeClass="tape-pink tape-stripes" style={{ top: '6%', right: '6%', transform: 'rotate(5deg)' }} />
-        <ScrapPostIt text="git commit -m 'oops'" color="#C8F0DC" tapeClass="tape-yellow" style={{ bottom: '15%', left: '16%', transform: 'rotate(4deg)' }} />
 
         {/* --- PHOTO & MAP CUTOUTS --- */}
         <PolaroidCamera style={{ top: '8%', left: '18%', transform: 'rotate(-8deg)' }} />
-        <IstanbulMap style={{ bottom: '10%', right: '12%', transform: 'rotate(8deg)' }} />
+        <EdirneMap style={{ bottom: '10%', right: '12%', transform: 'rotate(8deg)' }} />
 
-        {/* --- FLOATING DOODLES (Existing) --- */}
-        <motion.div className="absolute top-12 right-[25%]"
-          animate={{ y: [0, -10, 0], rotate: [-2, 2, -2] }}
-          transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}>
-          <CoffeeCupSVG />
-        </motion.div>
 
-        <motion.div className="absolute bottom-[28%] right-8"
+
+        <motion.div className="absolute bottom-[28%] right-12 z-20"
           animate={{ y: [0, -8, 0], rotate: [1, -2, 1] }}
           transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}>
           <PencilSVG />
@@ -60,7 +52,7 @@ export default function CoverPage() {
         <div className="absolute top-[25%] right-[8%] rotate-12 opacity-80 pointer-events-none"><DoodleHeart /></div>
         <div className="absolute bottom-[45%] left-[8%] -rotate-12 opacity-80 pointer-events-none"><DoodleLightbulb /></div>
         <div className="absolute top-[45%] right-[5%] rotate-45 opacity-80 pointer-events-none"><DoodleKey /></div>
-        <div className="absolute bottom-[15%] left-[55%] rotate-[20deg] opacity-80 pointer-events-none"><DoodleClock /></div>
+        <div className="absolute bottom-[20%] left-[25%] rotate-[20deg] opacity-80 pointer-events-none"><DoodleClock /></div>
         <div className="absolute top-[18%] left-[45%] -rotate-[15deg] opacity-80 pointer-events-none"><DoodleArrow color="#ec4899" /></div>
         <div className="absolute bottom-[25%] right-[28%] rotate-[165deg] opacity-80 pointer-events-none"><DoodleArrow color="#3b82f6" /></div>
 
@@ -72,6 +64,10 @@ export default function CoverPage() {
         <motion.span className="absolute bottom-32 right-12 text-pink-300 text-xl pointer-events-none"
           animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}>✧</motion.span>
 
+        {/* --- NEW TACTILE ELEMENTS --- */}
+        <TornTerminalPaper style={{ top: '12%', right: '14%', transform: 'rotate(7deg)' }} />
+
+
         {/* --- TITLE BLOCK --- */}
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20">
           <div className="relative">
@@ -79,21 +75,23 @@ export default function CoverPage() {
               style={{ textShadow: '3px 4px 0 rgba(0,0,0,0.2)' }}>
               Eylem's
             </h1>
-            <h1 className="font-sketch text-6xl sm:text-8xl font-bold text-amber-50 leading-tight"
+            <h1 className="font-sketch text-6xl sm:text-8xl font-bold text-amber-50 leading-tight pb-4"
               style={{ textShadow: '3px 4px 0 rgba(0,0,0,0.2)', transform: 'rotate(-2deg)' }}>
-              Sketchbook
+              Portfolio
             </h1>
             {/* Wavy underline */}
-            <svg width="280" height="24" viewBox="0 0 280 20" className="absolute -bottom-4 left-4">
+            <svg width="280" height="24" viewBox="0 0 280 20" className="absolute -bottom-4 left-10">
               <path d="M5 12 Q70 5 140 12 Q210 19 275 10" stroke="#fde68a" strokeWidth="4" fill="none"
                 strokeLinecap="round" style={{ filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.3))' }} />
             </svg>
           </div>
 
           {/* Subtitle */}
-          <p className="font-nunito text-[#7a6a5a] text-xl sm:text-2xl mt-6 opacity-95" style={{ transform: 'rotate(1deg)' }}>
+          <p className="font-hand text-[#faf7f2] text-xl sm:text-2xl mt-6 opacity-95" style={{ transform: 'rotate(1deg)' }}>
             a messy little timeline of my journey ✿
           </p>
+
+
 
           {/* --- STICKERS --- */}
           <div className="flex gap-4 mt-8">
@@ -118,15 +116,43 @@ export default function CoverPage() {
           </div>
         </div>
 
-        {/* --- DRAG TO PEEL HINT --- */}
-        <div className="absolute bottom-8 right-6 font-hand text-amber-200/80 text-xl pointer-events-none" style={{ transform: 'rotate(-4deg)' }}>
-          drag to peel &lt;
-        </div>
+
 
       </div>
     </div>
   )
 }
+
+/* --- NEW TACTILE ELEMENTS --- */
+
+function TornTerminalPaper({ style }) {
+  return (
+    <div className="absolute z-10 pointer-events-auto" style={{ width: 150, height: 100, ...style }}>
+      {/* Tape */}
+      <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 tape tape-gray w-12 h-5 rotate-[-3deg] z-20" />
+
+      {/* Torn Paper background */}
+      <svg width="150" height="100" className="absolute inset-0 z-0" style={{ filter: 'drop-shadow(3px 4px 5px rgba(0,0,0,0.3))' }}>
+        <path d="M 5 5 L 145 2 Q 148 20 145 40 Q 148 60 146 95 Q 110 98 80 94 Q 40 98 5 95 Z" fill="#1e1e1e" />
+        {/* Torn edge effect at top */}
+        <path d="M 5 5 Q 15 2 25 6 T 45 4 T 65 6 T 85 3 T 105 5 T 125 3 L 145 2 L 145 15 L 5 15 Z" fill="#2d2d2d" />
+      </svg>
+
+      {/* Terminal Content */}
+      <div className="absolute inset-0 z-10 p-3 pt-5 pointer-events-none flex flex-col font-mono text-[9px] leading-tight text-green-400">
+        <div><span className="text-pink-500">~</span>$ git status</div>
+        <div className="text-gray-300 mt-1">On branch main</div>
+        <div className="text-gray-300">Your branch is up to date.</div>
+        <div className="mt-2 text-yellow-300">working tree clean</div>
+        <div className="mt-1 animate-pulse font-bold">_</div>
+      </div>
+    </div>
+  )
+}
+
+
+
+
 
 function ScrapPostIt({ text, color, tapeClass, style }) {
   return (
@@ -139,45 +165,230 @@ function ScrapPostIt({ text, color, tapeClass, style }) {
 
 function PolaroidCamera({ style }) {
   return (
-    <div className="absolute p-2 pb-8 bg-amber-50 shadow-lg z-10" style={{ width: 110, height: 130, border: '1px solid #dcd0c0', ...style }}>
-      <div className="absolute -top-2 left-2 tape tape-blue w-12 h-5 rotate-[12deg]" />
-      <div className="absolute -bottom-2 right-2 tape tape-yellow w-12 h-5 rotate-[-8deg]" />
-      <div className="w-full h-full bg-[#f0e6d2] flex items-center justify-center relative shadow-inner">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5a4a3a" strokeWidth="1.5">
-          <rect x="3" y="7" width="18" height="13" rx="2" fill="#fff" />
-          <circle cx="12" cy="13" r="4" fill="#e8dfd0" />
-          <circle cx="12" cy="13" r="2" fill="#5a4a3a" />
-          <path d="M7 7 V5 a2 2 0 0 1 2 -2 h6 a2 2 0 0 1 2 2 v2" fill="#dcd0c0" />
-          <circle cx="18" cy="10" r="1" fill="#ef4444" stroke="none" />
+    <div className="absolute shadow-lg z-10" style={{ width: 120, height: 140, border: '2px solid #dcd0c0', background: '#fffef9', ...style }}>
+      <div className="absolute -top-3 left-3 tape tape-blue w-14 h-5 rotate-[8deg]" />
+      {/* Photo area */}
+      <div className="w-full" style={{ height: 100, background: 'linear-gradient(135deg, #fef3c7 0%, #dbeafe 50%, #fce7f3 100%)', position: 'relative', overflow: 'hidden' }}>
+        {/* Camera doodle inside photo */}
+        <svg width="120" height="100" viewBox="0 0 120 100" fill="none" style={{ position: 'absolute', inset: 0 }}>
+          {/* Sky */}
+          <rect width="120" height="100" fill="#bfdbfe" opacity="0.4" />
+          {/* Sun */}
+          <circle cx="95" cy="18" r="12" fill="#fde68a" opacity="0.9" />
+          {/* Hills */}
+          <ellipse cx="30" cy="95" rx="40" ry="25" fill="#bbf7d0" opacity="0.8" />
+          <ellipse cx="90" cy="98" rx="45" ry="22" fill="#a7f3d0" opacity="0.7" />
+          {/* Camera icon */}
+          <rect x="40" y="35" width="40" height="30" rx="4" fill="#1e293b" opacity="0.85" />
+          <circle cx="60" cy="50" r="9" fill="#374151" stroke="#60a5fa" strokeWidth="2" />
+          <circle cx="60" cy="50" r="5" fill="#1e40af" />
+          <circle cx="60" cy="50" r="2" fill="#93c5fd" />
+          <rect x="52" y="31" width="10" height="6" rx="2" fill="#334155" />
+          <circle cx="73" cy="40" r="2" fill="#ef4444" />
         </svg>
+      </div>
+      {/* Caption area */}
+      <div style={{ height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <span className="font-hand text-sm font-bold text-[#7a5a38]">📷 memories</span>
       </div>
     </div>
   )
 }
 
-function IstanbulMap({ style }) {
+function EdirneMap({ style }) {
   return (
-    <div className="absolute p-2 bg-[#f4e8d8] paper-scrap shadow-md z-10" style={{ width: 120, height: 100, ...style }}>
-      <div className="absolute top-1 -right-4 tape tape-pink w-12 h-5 rotate-[-15deg]" />
-      <div className="absolute bottom-2 -left-2 tape tape-mint w-10 h-4 rotate-[10deg]" />
-      <div className="w-full h-full border-2 border-dashed border-[#c0b0a0] flex flex-col items-center justify-center relative overflow-hidden">
-        <svg width="100" height="60" viewBox="0 0 100 60" fill="none">
-          <path d="M20 0 Q40 30 80 60" stroke="#3b82f6" strokeWidth="4" strokeLinecap="round" opacity="0.6" />
-          <path d="M45 25 L55 35" stroke="#ef4444" strokeWidth="2.5" strokeDasharray="3 3" />
-          <circle cx="45" cy="25" r="4" fill="#ef4444" />
-        </svg>
-        <span className="font-caveat text-sm text-[#7a6a5a] absolute bottom-1 right-2">istanbul ♥</span>
+    <div className="absolute z-10" style={{ width: 180, height: 160, ...style }}>
+      {/* Tapes */}
+      <div className="absolute top-0 -right-2 tape tape-pink w-12 h-5 rotate-[-15deg] z-30 pointer-events-none" />
+      <div className="absolute bottom-1 -left-2 tape tape-mint w-10 h-4 rotate-[10deg] z-30 pointer-events-none" />
+
+      {/* Stamp SVG Background & Illustration */}
+      <svg width="180" height="160" className="absolute inset-0 z-0 pointer-events-none" style={{ filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.15))' }}>
+        <defs>
+          <mask id="stamp-mask-edirne">
+            <rect x="0" y="0" width="180" height="160" fill="white" />
+            <rect x="0" y="0" width="180" height="160" fill="none" stroke="black" strokeWidth="12" strokeDasharray="0 14.5" strokeLinecap="round" />
+          </mask>
+          <clipPath id="stamp-inner-clip">
+            <rect x="12" y="12" width="156" height="136" />
+          </clipPath>
+        </defs>
+
+        {/* Stamp Paper Base */}
+        <rect x="0" y="0" width="180" height="160" fill="#fdfaf3" mask="url(#stamp-mask-edirne)" />
+
+        {/* --- Inner Vector Illustration --- */}
+        <g clipPath="url(#stamp-inner-clip)">
+          {/* Sky */}
+          <rect x="12" y="12" width="156" height="136" fill="#e0f2fe" />
+
+          {/* Sun */}
+          <circle cx="140" cy="35" r="14" fill="#fde047" />
+          <circle cx="140" cy="35" r="18" fill="#fef08a" opacity="0.5" />
+
+          {/* Background hills */}
+          <path d="M 12 70 Q 50 45 100 70 T 170 65 L 170 150 L 12 150 Z" fill="#dcfce3" />
+          <path d="M 12 85 Q 70 60 120 85 T 170 80 L 170 150 L 12 150 Z" fill="#bbf7d0" />
+
+          {/* Selimiye Mosque Silhouette */}
+          <g fill="#94a3b8" opacity="0.7">
+            {/* Minarets */}
+            <rect x="68" y="45" width="2" height="30" />
+            <rect x="88" y="45" width="2" height="30" />
+            <rect x="73" y="50" width="1.5" height="25" />
+            <rect x="83.5" y="50" width="1.5" height="25" />
+            {/* Dome */}
+            <path d="M 70 75 Q 79 55 88 75 Z" />
+            <rect x="70" y="75" width="18" height="12" />
+          </g>
+
+          {/* River Surface */}
+          <rect x="12" y="105" width="156" height="45" fill="#60a5fa" />
+
+          {/* River Waves */}
+          <path d="M 20 115 Q 30 112 40 115 T 60 115 T 80 115 T 100 115 T 120 115" fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
+          <path d="M 50 125 Q 60 122 70 125 T 90 125 T 110 125 T 130 125 T 150 125" fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
+          <path d="M 15 135 Q 25 132 35 135 T 55 135 T 75 135 T 95 135 T 115 135" fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
+
+          {/* Bridge (Meriç Köprüsü) */}
+          <rect x="12" y="90" width="156" height="15" fill="#e5e5e5" />
+          <path d="M 12 92 L 168 92" stroke="#d4d4d8" strokeWidth="1.5" />
+          <path d="M 12 105 L 168 105" stroke="#a1a1aa" strokeWidth="1" />
+
+          {/* Bridge Arches (Shadowed water under the bridge) */}
+          <path d="M 25 105 A 12 10 0 0 0 49 105 Z" fill="#3b82f6" />
+          <path d="M 60 105 A 12 10 0 0 0 84 105 Z" fill="#3b82f6" />
+          <path d="M 95 105 A 12 10 0 0 0 119 105 Z" fill="#3b82f6" />
+          <path d="M 130 105 A 12 10 0 0 0 154 105 Z" fill="#3b82f6" />
+
+          {/* Arch outlines */}
+          <path d="M 25 105 A 12 10 0 0 0 49 105" fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
+          <path d="M 60 105 A 12 10 0 0 0 84 105" fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
+          <path d="M 95 105 A 12 10 0 0 0 119 105" fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
+          <path d="M 130 105 A 12 10 0 0 0 154 105" fill="none" stroke="#a1a1aa" strokeWidth="1.5" />
+
+          {/* Text: edirne */}
+          <text x="89" y="142" fontFamily="'Caveat', cursive" fontSize="24" fontWeight="bold" fill="#1e3a8a" textAnchor="middle" style={{ filter: 'drop-shadow(1px 1px 0 rgba(255,255,255,0.7))' }}>edirne ♥</text>
+        </g>
+
+        {/* Inner Frame Border */}
+        <rect x="12" y="12" width="156" height="136" fill="none" stroke="#d1d5db" strokeWidth="2" />
+      </svg>
+
+      {/* Postmark Overlay (Damga) */}
+      <svg className="absolute inset-0 z-20 pointer-events-none opacity-60" width="180" height="160">
+        <g stroke="#1a1a1a" fill="none" opacity="0.6">
+          <circle cx="140" cy="45" r="22" strokeWidth="1.5" />
+          <circle cx="140" cy="45" r="20" strokeWidth="1" />
+          <text x="140" y="40" fontFamily="sans-serif" fontSize="6" fontWeight="bold" fill="#1a1a1a" textAnchor="middle" stroke="none">EDİRNE</text>
+          <text x="140" y="53" fontFamily="sans-serif" fontSize="6" fontWeight="bold" fill="#1a1a1a" textAnchor="middle" stroke="none">19 05 26</text>
+
+          <path d="M 140 45 Q 155 35 170 45 T 200 45" strokeWidth="2" />
+          <path d="M 140 40 Q 155 30 170 40 T 200 40" strokeWidth="2" />
+          <path d="M 140 50 Q 155 40 170 50 T 200 50" strokeWidth="2" />
+        </g>
+      </svg>
+
+      {/* Stamp Values (10 Kuruş, TÜRKİYE) */}
+      <div className="absolute bottom-4 left-4 z-20 pointer-events-none flex flex-col">
+        <span className="font-serif text-xl font-bold text-[#d97757] leading-none" style={{ textShadow: '1px 1px 0 rgba(255,255,255,0.9)' }}>10</span>
+      </div>
+      <div className="absolute top-4 left-4 z-20 pointer-events-none">
+        <span className="font-sans text-[8px] font-bold text-[#5a4a3a] tracking-widest" style={{ textShadow: '1px 1px 0 rgba(255,255,255,0.9)' }}>TÜRKİYE</span>
       </div>
     </div>
   )
 }
 
-/* --- SVG Doodles --- */
-function DoodleHeart() { return <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg> }
-function DoodleLightbulb() { return <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#eab308" strokeWidth="2.5"><path d="M9 18h6" /> <path d="M10 22h4" /> <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A6 6 0 1 0 7.5 11.5c.76.76 1.23 1.52 1.41 2.5" /></svg> }
-function DoodleKey() { return <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2.5"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" /></svg> }
-function DoodleClock() { return <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="2.5"><circle cx="12" cy="12" r="10" /> <polyline points="12 6 12 12 16 14" /></svg> }
-function DoodleArrow({ color }) { return <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12" /> <polyline points="12 5 19 12 12 19" /></svg> }
+/* --- SVG Doodles (Scribble/Hand-drawn style) --- */
+function DoodleHeart() {
+  return (
+    <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+      {/* hand-drawn heart — slightly wobbly, sketchy double stroke */}
+      <path d="M25 38 C14 28 6 22 7 14 C8 7 14 5 19 8 C21 9 23 11 25 13 C27 11 29 9 31 8 C36 5 42 7 43 14 C44 22 36 28 25 38 Z"
+        fill="#fecaca" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      {/* second rough pass for sketch feel */}
+      <path d="M25 37 C14.5 27.5 6.5 22.5 7.5 14.5 C8.5 8 13.5 6 18.5 8.5"
+        fill="none" stroke="#ef4444" strokeWidth="0.8" strokeLinecap="round" opacity="0.4" />
+    </svg>
+  )
+}
+function DoodleLightbulb() {
+  return (
+    <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+      {/* Wobbly bulb outline */}
+      <path d="M18 34 C14 30 11 24 13 17 C15 10 20 7 25 7 C30 7 35 10 37 17 C39 24 36 30 32 34 C31 36 19 36 18 34 Z"
+        fill="#fef9c3" stroke="#ca8a04" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Filament scribble */}
+      <path d="M20 22 Q22 18 25 22 Q28 26 30 22"
+        fill="none" stroke="#eab308" strokeWidth="1.8" strokeLinecap="round" />
+      {/* Base lines */}
+      <path d="M19 36 Q19 38 20 39 L30 39 Q31 38 31 36" fill="none" stroke="#92400e" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M20.5 41 L29.5 41" stroke="#92400e" strokeWidth="1.8" strokeLinecap="round" />
+      {/* Shine squiggle */}
+      <path d="M15 16 Q13 13 15 10" fill="none" stroke="#fde047" strokeWidth="1.5" strokeLinecap="round" opacity="0.7" />
+    </svg>
+  )
+}
+function DoodleKey() {
+  return (
+    <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+      {/* Wobbly key ring */}
+      <path d="M13 35 C8 35 5 31 5 26 C5 21 9 17 14 17 C19 17 23 21 23 26 C23 31 19 35 14 35"
+        fill="#ede9fe" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" />
+      {/* second pass for sketch look */}
+      <path d="M13 34 C8.5 34 6 30.5 6 26" fill="none" stroke="#7c3aed" strokeWidth="0.8" strokeLinecap="round" opacity="0.3" />
+      {/* Hole in key */}
+      <path d="M14 29 C12.5 29 11.5 28 11.5 26.5 C11.5 25 12.5 24 14 24 C15.5 24 16.5 25 16.5 26.5"
+        fill="none" stroke="#6d28d9" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Key shaft - slightly wobbly */}
+      <path d="M22 24 L42 16" stroke="#7c3aed" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M22.3 24.5 L41.5 16.2" stroke="#7c3aed" strokeWidth="0.7" strokeLinecap="round" opacity="0.3" />
+      {/* Teeth */}
+      <path d="M36 18 L34 23" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" />
+      <path d="M30 21 L28 26" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+function DoodleClock() {
+  return (
+    <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+      {/* Wobbly clock face */}
+      <path d="M25 5 C36 5 45 14 45 25 C45 36 36 45 25 45 C14 45 5 36 5 25 C5 14 14 5 25 5"
+        fill="#fff7ed" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+      {/* Second wobbly pass */}
+      <path d="M25 6 C35.5 6 44 14.5 44 25"
+        fill="none" stroke="#fb923c" strokeWidth="0.8" strokeLinecap="round" opacity="0.35" />
+      {/* Hour hand */}
+      <path d="M25 25 L25 14" stroke="#ea580c" strokeWidth="2.5" strokeLinecap="round" />
+      {/* Minute hand */}
+      <path d="M25 25 L33 29" stroke="#ea580c" strokeWidth="2" strokeLinecap="round" />
+      {/* Center dot */}
+      <path d="M24 25 C24 24.4 24.4 24 25 24 C25.6 24 26 24.4 26 25"
+        fill="#ea580c" stroke="#ea580c" strokeWidth="1" />
+      {/* Tick marks */}
+      <line x1="25" y1="7.5" x2="25" y2="10.5" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="25" y1="39.5" x2="25" y2="42.5" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="7.5" y1="25" x2="10.5" y2="25" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="39.5" y1="25" x2="42.5" y2="25" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+function DoodleArrow({ color }) {
+  return (
+    <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+      {/* Wobbly arrow shaft */}
+      <path d="M6 28 C10 26 18 22 32 21 Q36 21 40 22"
+        stroke={color} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      {/* Second sketchy pass */}
+      <path d="M6 29 C10 27 18 23 31 22"
+        stroke={color} strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.35" />
+      {/* Arrow head - hand drawn */}
+      <path d="M34 15 C37 18 40 20 40 22 C40 24 37 27 34 30"
+        stroke={color} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    </svg>
+  )
+}
 
 /* --- Existing Icons --- */
 function TapeCorner({ position }) {
@@ -188,35 +399,50 @@ function TapeCorner({ position }) {
   return <div className="absolute tape tape-stripes w-16 h-6" style={styles[position]} />
 }
 
-function CoffeeCupSVG() {
-  return (
-    <svg width="55" height="55" viewBox="0 0 44 44" fill="none">
-      <rect x="8" y="18" width="22" height="18" rx="3" stroke="#7a5a38" strokeWidth="2" fill="rgba(255,243,176,0.6)" />
-      <path d="M30 22 Q36 22 36 27 Q36 32 30 32" stroke="#7a5a38" strokeWidth="2" fill="none" />
-      <path d="M8 18 Q10 10 18 10 Q24 10 26 18" stroke="#7a5a38" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-      <path d="M14 12 Q13 8 15 5" stroke="#7a5a38" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-      <path d="M20 11 Q19 7 21 4" stroke="#7a5a38" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-      <rect x="6" y="36" width="26" height="3" rx="1.5" stroke="#7a5a38" strokeWidth="1.5" fill="rgba(255,243,176,0.4)" />
-    </svg>
-  )
-}
 
 function PencilSVG() {
   return (
-    <svg width="48" height="48" viewBox="0 0 38 38" fill="none">
-      <rect x="16" y="4" width="8" height="24" rx="2" transform="rotate(30 19 19)" stroke="#7a5a38" strokeWidth="2" fill="rgba(255,243,176,0.6)" />
-      <path d="M22 28 L18 34 L26 30 Z" fill="#7a5a38" />
-      <line x1="16" y1="8" x2="24" y2="6" stroke="#7a5a38" strokeWidth="1.5" strokeLinecap="round" />
+    <svg width="65" height="65" viewBox="0 0 50 50" fill="none">
+      {/* Pencil body - rotated, slightly wobbly quad */}
+      <path d="M18 4 C20 3 30 7 31 9 C32 27 30 32 28 34 C26 35 20 33 18 32 C16 30 14 25 16 6 Z"
+        fill="#fde68a" stroke="#92400e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Eraser band */}
+      <path d="M18 5 C20 4 30 8 31 10 L30 13 C28 12 20 9 18 9 Z"
+        fill="#fca5a5" stroke="#92400e" strokeWidth="1" />
+      {/* Eraser top */}
+      <path d="M18 4 C20 3 30 7 31 9 L30 7 C28 6 20 3 18 4"
+        fill="#f9a8d4" stroke="#92400e" strokeWidth="1" />
+      {/* Wood tip */}
+      <path d="M18 32 C19 33 27 35 28 34 L25 44 Z"
+        fill="#d4a76a" stroke="#92400e" strokeWidth="1.5" strokeLinejoin="round" />
+      {/* Lead point */}
+      <path d="M23 42 L25 44 L27 42" fill="#374151" stroke="#374151" strokeWidth="0.8" strokeLinejoin="round" />
+      {/* Grain line on body */}
+      <path d="M19 15 C21 15 29 17 30 17" fill="none" stroke="#92400e" strokeWidth="0.7" strokeLinecap="round" opacity="0.4" />
+      <path d="M19 20 C21 20 29 22 30 22" fill="none" stroke="#92400e" strokeWidth="0.7" strokeLinecap="round" opacity="0.3" />
     </svg>
   )
 }
 
 function CodeBracketsSVG() {
   return (
-    <svg width="60" height="44" viewBox="0 0 50 36" fill="none">
-      <path d="M14 8 L6 18 L14 28" stroke="#7a5a38" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M36 8 L44 18 L36 28" stroke="#7a5a38" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M28 6 L22 30" stroke="#7a5a38" strokeWidth="2" fill="none" strokeLinecap="round" />
+    <svg width="85" height="60" viewBox="0 0 70 44" fill="none">
+      {/* Left curly-ish bracket - wobbly */}
+      <path d="M20 4 C17 4 15 6 15 9 L15 17 C15 19 13 21 11 21 C13 21 15 23 15 25 L15 35 C15 38 17 40 20 40"
+        stroke="#a78bfa" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      {/* second sketchy pass */}
+      <path d="M20.5 5 C17.5 5 15.5 6.5 15.5 9.5 L15.5 17"
+        stroke="#a78bfa" strokeWidth="0.8" strokeLinecap="round" opacity="0.3" fill="none" />
+      {/* Right curly-ish bracket - wobbly */}
+      <path d="M50 4 C53 4 55 6 55 9 L55 17 C55 19 57 21 59 21 C57 21 55 23 55 25 L55 35 C55 38 53 40 50 40"
+        stroke="#a78bfa" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      {/* Slash - wobble */}
+      <path d="M40 5 C39 10 36 30 35 39"
+        stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <path d="M40.5 6 C39.5 11 36.5 31 35.5 39"
+        stroke="#f472b6" strokeWidth="0.7" strokeLinecap="round" opacity="0.3" fill="none" />
     </svg>
   )
 }
+
+

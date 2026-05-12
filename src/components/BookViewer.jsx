@@ -36,6 +36,7 @@ const Page = React.forwardRef((props, ref) => {
 
 export default function BookViewer() {
   const [currentIdx, setCurrentIdx] = useState(0)
+  const [bookState, setBookState] = useState('read')
   const bookRef = useRef()
 
   const onFlip = useCallback((e) => {
@@ -79,6 +80,10 @@ export default function BookViewer() {
         `
       }}
     >
+      {/* Realism: Wood & Dust Texture Overlays */}
+      <div className="absolute inset-0 pointer-events-none z-0 mix-blend-multiply opacity-[0.25]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/wood-pattern.png")' }} />
+      <div className="absolute inset-0 pointer-events-none z-0 mix-blend-overlay opacity-[0.3]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }} />
+
       <Navigation
         activePage={PAGES[currentIdx]?.id || 'cover'}
         onNavigate={(id) => {
@@ -89,8 +94,48 @@ export default function BookViewer() {
 
       <div className="pt-20 flex-1 w-full flex items-center justify-center p-4 lg:p-12 relative overflow-hidden">
 
-        {/* Scattered Desk Items (Visible when book is closed/centered) */}
+        {/* Scattered Desk Items */}
         <DeskEnvironment currentIdx={currentIdx} />
+
+        {/* MP3 Player - lives OUTSIDE DeskEnvironment so pointer-events always work */}
+        {currentIdx === 0 && (
+          <div className="absolute top-[22%] left-[2%] sm:left-[5%] md:left-[7%] pointer-events-auto hidden lg:block" style={{ transform: 'rotateZ(-12deg)', zIndex: bookState === 'read' ? 60 : 0 }}>
+            <RetroMP3Player />
+            {/* Visual cue to click */}
+            <motion.div
+              className="absolute -bottom-10 left-15 pointer-events-none flex flex-col items-center"
+              animate={{ x: [-4, 4, -4] }}
+              transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+              style={{ transform: 'scaleX(-1)' }}
+            >
+              <span className="font-hand text-white text-base font-bold whitespace-nowrap" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.4)' }}>click for vibes!</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ transform: 'rotate(-40deg)' }}>
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </motion.div>
+          </div>
+        )}
+
+        {/* Vintage Stamp - lives OUTSIDE DeskEnvironment, positioned below MP3 */}
+        {currentIdx === 0 && (
+          <div className="absolute top-[49%] left-[11%] hidden lg:block" style={{ transform: 'rotate(-12deg)', zIndex: bookState === 'read' ? 55 : 0 }}>
+            <VintageStampSVG />
+          </div>
+        )}
+
+        {/* Napkin Scribble - right side, outside DeskEnvironment */}
+        {currentIdx === 0 && (
+          <div className="absolute top-[45%] right-[50%] hidden lg:block" style={{ transform: 'rotate(8deg)', zIndex: bookState === 'read' ? 45 : 0 }}>
+            <NapkinScribbleSVG />
+          </div>
+        )}
+
+        {/* USB Hub - right side, below napkin */}
+        {currentIdx === 0 && (
+          <div className="absolute top-[65%] right-[76%] hidden lg:block" style={{ transform: 'rotate(-4deg)', zIndex: bookState === 'read' ? 45 : 0 }}>
+            <UsbHubSVG />
+          </div>
+        )}
 
         {/* The actual flipbook */}
         <HTMLFlipBook
@@ -105,11 +150,14 @@ export default function BookViewer() {
           showCover={true}
           mobileScrollSupport={true}
           useMouseEvents={true}
+          clickEventForward={true}
+          swipeDistance={30}
           drawShadow={true}
           flippingTime={1200}
           onFlip={onFlip}
+          onChangeState={(e) => setBookState(e.data)}
           ref={bookRef}
-          className="book-container drop-shadow-2xl"
+          className="book-container drop-shadow-2xl relative z-50"
           style={{ margin: '0 auto', border: '1px solid #d8cdba', borderRadius: '4px' }}
         >
           {PAGES.map((p, i) => (
@@ -129,7 +177,7 @@ export default function BookViewer() {
             animate={{ x: [0, -10, 0] }}
             transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
           >
-            <span className="font-caveat text-[#7a6a5a] text-xl">drag to peel</span>
+
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M15 18L9 12L15 6" stroke="#7a6a5a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -212,62 +260,57 @@ function DeskEnvironment({ currentIdx }) {
       <div className="relative w-full h-full max-w-[1200px] mx-auto">
 
         {/* Coffee Cup with Steam (top-left) */}
-        <div className="absolute top-[8%] left-[2%] rotate-[-15deg]">
+        <motion.div className="absolute top-[8%] left-[3%]"
+          animate={{ y: [0, -3, 0], rotate: [-15, -14.5, -15] }} transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}>
           <CoffeeRing />
           <div className="absolute top-2 left-3">
             <CoffeeMug />
           </div>
-        </div>
-
-        {/* Retro MP3 Player on the Left */}
-        <div className="absolute top-[25%] left-[2%] sm:left-[5%] md:left-[8%] pointer-events-auto z-20" style={{ transform: 'rotateZ(-12deg)' }}>
-          <RetroMP3Player />
-        </div>
-
-        {/* Vintage Stamp (Top Left Edge) */}
-        <div className="absolute top-[35%] left-[-2%] rotate-[-15deg] z-10 cursor-pointer transition-transform hover:scale-105">
-          <VintageStampSVG />
-        </div>
+        </motion.div>
 
         {/* Crumpled Paper */}
-        <div className="absolute top-[55%] left-[6%] rotate-[35deg]">
+        <motion.div className="absolute top-[40%] right-[3%]"
+          animate={{ y: [0, 2, 0], rotate: [35, 36, 35] }} transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut' }}>
           <CrumpledPaperSVG />
-        </div>
+        </motion.div>
 
         {/* Pink Sticky Note */}
-        <div className="absolute top-[18%] left-[25%] rotate-[14deg]">
-          <div className="paper-scrap p-4 w-44 shadow-2xl flex flex-col items-center" style={{ background: '#fce4ec', filter: 'drop-shadow(6px 12px 10px rgba(0,0,0,0.3))' }}>
-            <div className="absolute -top-3 tape tape-stripes w-14 h-6 rotate-[-8deg]" />
-            <span className="font-hand text-3xl font-bold text-pink-900 mt-2 text-center leading-tight">don't forget<br />to commit!</span>
+        <motion.div className="absolute top-[18%] left-[25%]"
+          animate={{ y: [0, -2, 0], rotate: [14, 15, 14] }} transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}>
+          <div className="paper-scrap p-4 w-44 flex flex-col items-center relative overflow-hidden" style={{ background: '#fce4ec', filter: 'drop-shadow(2px 3px 2px rgba(0,0,0,0.2))' }}>
+            <div className="absolute inset-0 pointer-events-none mix-blend-multiply opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/paper-fibers.png")' }} />
+            <div className="absolute -top-3 tape tape-stripes w-14 h-6 rotate-[-8deg] z-10" style={{ filter: 'drop-shadow(1px 2px 1px rgba(0,0,0,0.15))' }} />
+            <span className="font-hand text-3xl font-bold text-pink-500 mt-2 text-center leading-tight relative z-10">don't forget<br />to commit!</span>
+            {/* Paper curl imperfection */}
+            <div className="absolute bottom-0 right-0 w-8 h-8 bg-pink-200 opacity-40 shadow-inner rounded-tl-full" style={{ transform: 'rotate(-5deg)' }} />
           </div>
-        </div>
-
-        <div className="absolute bottom-[10%] right-[15%] rotate-[10deg]">
-          <NapkinScribbleSVG />
-        </div>
+        </motion.div>
 
         {/* Ray-Ban Sunglasses */}
-        <div className="absolute top-[62%] left-[20%] rotate-[-12deg]">
+        <motion.div className="absolute top-[62%] left-[20%]"
+          animate={{ y: [0, 1.5, 0], rotate: [-12, -11.5, -12] }} transition={{ repeat: Infinity, duration: 8, ease: 'easeInOut' }}>
           <RaybanSVG />
-        </div>
+        </motion.div>
 
         {/* Fineliner Pen */}
-        <div className="absolute bottom-[20%] left-[30%] rotate-[-45deg]">
+        <motion.div className="absolute bottom-[20%] left-[30%]"
+          animate={{ y: [0, -1, 0], rotate: [-70, -69, -70] }} transition={{ repeat: Infinity, duration: 5.5, ease: 'easeInOut' }}>
           <FinelinerSVG />
-        </div>
+        </motion.div>
 
         {/* AirPods Case */}
-        <div className="absolute bottom-[5%] left-[10%] rotate-[25deg]">
+        <motion.div className="absolute bottom-[45%] left-[20%]"
+          animate={{ y: [0, 2, 0], rotate: [25, 26, 25] }} transition={{ repeat: Infinity, duration: 6.5, ease: 'easeInOut' }}>
           <AirPodsSVG />
-        </div>
-
-
-
-
-
+        </motion.div>
+        
         {/* Scattered Paperclips */}
-        <PaperclipSVG style={{ top: '65%', left: '38%', transform: 'rotate(45deg)' }} />
-        <PaperclipSVG style={{ top: '70%', left: '35%', transform: 'rotate(-20deg)' }} />
+        <motion.div className="absolute top-[65%] left-[38%]" animate={{ rotate: [45, 47, 45] }} transition={{ repeat: Infinity, duration: 10 }}>
+          <PaperclipSVG style={{}} />
+        </motion.div>
+        <motion.div className="absolute top-[70%] left-[35%]" animate={{ rotate: [-20, -18, -20] }} transition={{ repeat: Infinity, duration: 9 }}>
+          <PaperclipSVG style={{}} />
+        </motion.div>
 
       </div>
     </div>
@@ -275,21 +318,122 @@ function DeskEnvironment({ currentIdx }) {
 }
 
 /* --- SVG ASSETS --- */
+function UsbHubSVG() {
+  return (
+    <svg width="240" height="160" viewBox="0 0 150 100" style={{ filter: 'drop-shadow(4px 8px 6px rgba(0,0,0,0.3))' }}>
+      {/* Hub body */}
+      <rect x="5" y="30" width="90" height="32" rx="7" fill="#2d3748" stroke="#1a202c" strokeWidth="2" />
+      {/* Glossy stripe */}
+      <rect x="7" y="31" width="86" height="10" rx="5" fill="rgba(255,255,255,0.07)" />
+
+      {/* USB ports x4 */}
+      <rect x="14" y="38" width="12" height="9" rx="2" fill="#0d1117" stroke="#4a5568" strokeWidth="1" />
+      <rect x="16" y="40" width="8" height="4" rx="0.5" fill="#4a5568" />
+      <rect x="32" y="38" width="12" height="9" rx="2" fill="#0d1117" stroke="#4a5568" strokeWidth="1" />
+      <rect x="34" y="40" width="8" height="4" rx="0.5" fill="#4a5568" />
+      <rect x="50" y="38" width="12" height="9" rx="2" fill="#0d1117" stroke="#4a5568" strokeWidth="1" />
+      <rect x="52" y="40" width="8" height="4" rx="0.5" fill="#4a5568" />
+      <rect x="68" y="38" width="12" height="9" rx="2" fill="#0d1117" stroke="#4a5568" strokeWidth="1" />
+      <rect x="70" y="40" width="8" height="4" rx="0.5" fill="#4a5568" />
+
+      {/* LEDs - clearly visible */}
+      <circle cx="86" cy="35" r="3" fill="#22c55e" style={{ filter: 'drop-shadow(0 0 3px #22c55e)' }} />
+      <circle cx="93" cy="35" r="3" fill="#3b82f6" style={{ filter: 'drop-shadow(0 0 3px #3b82f6)' }} />
+
+      {/* USB 3.0 label */}
+
+
+      {/* Main power cable (thick, dark) going left */}
+      <path d="M 5 46 C -10 46 -15 70 -5 80" fill="none" stroke="#1a1a1a" strokeWidth="7" strokeLinecap="round" />
+      <path d="M 5 46 C -10 46 -15 70 -5 80" fill="none" stroke="#374151" strokeWidth="4" strokeLinecap="round" />
+
+      {/* Red cable - tangled */}
+      <path d="M 95 40 C 115 30 140 45 135 62 C 130 75 112 68 118 55 C 124 42 142 38 148 55" fill="none" stroke="#ef4444" strokeWidth="4" strokeLinecap="round" />
+
+      {/* Blue cable - looping */}
+      <path d="M 95 46 C 118 38 145 55 140 70 C 136 82 118 76 124 63" fill="none" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
+
+      {/* Yellow cable - shorter */}
+      <path d="M 95 52 C 112 48 130 60 128 72 Q 125 80 115 78" fill="none" stroke="#eab308" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
+
+      {/* USB-A connector on red cable end */}
+      <rect x="143" y="51" width="9" height="7" rx="1.5" fill="#94a3b8" stroke="#64748b" strokeWidth="1" />
+      <rect x="144.5" y="53" width="6" height="3" rx="0.5" fill="#1e293b" />
+    </svg>
+  )
+}
+
+
 function CoffeeMug() {
   return (
-    <svg width="180" height="180" viewBox="0 0 100 100" style={{ filter: 'drop-shadow(15px 25px 12px rgba(0,0,0,0.4))' }}>
-      {/* Handle */}
-      <path d="M 70 30 C 95 30 95 70 70 70" fill="none" stroke="#fdfbf7" strokeWidth="12" strokeLinecap="round" />
+    <svg width="220" height="220" viewBox="0 0 100 100" style={{ filter: 'drop-shadow(20px 30px 20px rgba(0,0,0,0.4))' }}>
+      <defs>
+        {/* Ceramic gradients */}
+        <linearGradient id="ceramic-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="50%" stopColor="#fdfbf7" />
+          <stop offset="100%" stopColor="#e2d8c3" />
+        </linearGradient>
+        {/* Liquid depth gradient */}
+        <radialGradient id="coffee-grad" cx="50%" cy="50%" r="50%">
+          <stop offset="40%" stopColor="#1a0b02" />
+          <stop offset="85%" stopColor="#3d1b04" />
+          <stop offset="100%" stopColor="#63300a" />
+        </radialGradient>
+        {/* Inner shadow for cup depth */}
+        <radialGradient id="cup-inner" cx="45%" cy="45%" r="55%">
+          <stop offset="70%" stopColor="#fdfbf7" stopOpacity="0" />
+          <stop offset="100%" stopColor="#baa68c" stopOpacity="0.8" />
+        </radialGradient>
+        {/* Liquid texture / noise */}
+        <filter id="coffee-noise" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" result="noise" />
+          <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.15 0" result="coloredNoise" />
+          <feComposite in="coloredNoise" in2="SourceGraphic" operator="in" />
+        </filter>
+      </defs>
+      
+      {/* Handle with shadow */}
+      <path d="M 70 30 C 95 30 95 70 70 70" fill="none" stroke="#e8dfce" strokeWidth="12" strokeLinecap="round" style={{ filter: 'drop-shadow(0 12px 10px rgba(0,0,0,0.25))' }} />
+      <path d="M 70 30 C 95 30 95 70 70 70" fill="none" stroke="url(#ceramic-grad)" strokeWidth="12" strokeLinecap="round" />
+      
       {/* Cup body */}
-      <circle cx="50" cy="50" r="40" fill="#fdfbf7" stroke="#e0d5c1" strokeWidth="2" />
-      {/* Coffee inside */}
-      <circle cx="50" cy="50" r="34" fill="#1a1005" />
-      {/* Foam/crema */}
-      <path d="M 30 50 Q 50 30 70 50 T 40 70" stroke="#8b5a2b" strokeWidth="4" fill="none" opacity="0.6" />
-      <path d="M 45 35 Q 60 25 75 40" stroke="#8b5a2b" strokeWidth="2" fill="none" opacity="0.4" />
+      <circle cx="50" cy="50" r="40" fill="url(#ceramic-grad)" stroke="#d4c9b8" strokeWidth="1" />
+      <circle cx="50" cy="50" r="39" fill="url(#cup-inner)" />
+      
+      {/* Coffee liquid */}
+      <circle cx="50" cy="50" r="34" fill="url(#coffee-grad)" />
+      
+      {/* Coffee oil variation & noise overlay */}
+      <circle cx="50" cy="50" r="34" fill="#000" style={{ filter: 'url(#coffee-noise)', mixBlendMode: 'multiply' }} opacity="0.6" />
+      
+      {/* Foam / Crema swirls */}
+      <path d="M 25 45 Q 40 25 60 40 T 75 55" stroke="#996336" strokeWidth="3" fill="none" opacity="0.5" strokeLinecap="round" style={{ filter: 'blur(1px)' }} />
+      <path d="M 35 60 Q 50 80 65 50" stroke="#b07d4f" strokeWidth="2" fill="none" opacity="0.4" strokeLinecap="round" style={{ filter: 'blur(0.5px)' }} />
+      
+      {/* Small random crema spots */}
+      <circle cx="45" cy="35" r="1.5" fill="#a67b4c" opacity="0.6" style={{ filter: 'blur(0.5px)' }} />
+      <circle cx="65" cy="45" r="1" fill="#b07d4f" opacity="0.5" />
+      <circle cx="35" cy="55" r="2" fill="#996336" opacity="0.4" style={{ filter: 'blur(1px)' }} />
+
+      {/* Coffee meniscus ring */}
+      <circle cx="50" cy="50" r="33.5" fill="none" stroke="#4a2105" strokeWidth="1.5" opacity="0.9" />
+      
+      {/* Surface reflection (gloss) */}
+      <path d="M 22 40 A 28 28 0 0 1 40 22" stroke="rgba(255,255,255,0.15)" strokeWidth="4" fill="none" strokeLinecap="round" style={{ filter: 'blur(1px)' }} />
+      <path d="M 24 40 A 26 26 0 0 1 40 24" stroke="rgba(255,255,255,0.25)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+      
+      {/* Cup imperfections */}
+      {/* tiny stain on edge */}
+      <path d="M 17 42 Q 15 45 18 48" stroke="#4a2105" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.4" />
+      {/* small scratch */}
+      <path d="M 55 85 L 57 87" stroke="#b8ab95" strokeWidth="0.8" opacity="0.7" />
+      {/* ceramic bump */}
+      <circle cx="40" cy="88" r="1" fill="#fdfbf7" opacity="0.8" style={{ filter: 'drop-shadow(0.5px 0.5px 0.5px rgba(0,0,0,0.2))' }} />
+
       {/* Steam */}
-      <path d="M 40 40 Q 35 25 45 10" stroke="#fff" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.4" className="animate-pulse" />
-      <path d="M 60 50 Q 55 30 65 15" stroke="#fff" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.3" className="animate-pulse" style={{ animationDelay: '1s' }} />
+      <path d="M 40 40 Q 35 25 45 10" stroke="#fff" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.25" className="animate-pulse" style={{ filter: 'blur(2px)' }} />
+      <path d="M 60 50 Q 55 30 65 15" stroke="#fff" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.15" className="animate-pulse" style={{ animationDelay: '1s', filter: 'blur(3px)' }} />
     </svg>
   )
 }
@@ -306,34 +450,72 @@ function CoffeeRing() {
 
 function RaybanSVG() {
   return (
-    <svg width="280" height="150" viewBox="0 0 160 90" style={{ filter: 'drop-shadow(12px 18px 10px rgba(0,0,0,0.4))' }}>
+    <svg width="300" height="170" viewBox="0 0 160 90" style={{ filter: 'drop-shadow(6px 8px 4px rgba(0,0,0,0.6))' }}>
+      <defs>
+        {/* Lens physical gradient (glass reflection) */}
+        <linearGradient id="lens-glare" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="rgba(255,255,255,0.25)" />
+          <stop offset="25%" stopColor="rgba(255,255,255,0.05)" />
+          <stop offset="50%" stopColor="rgba(255,255,255,0)" />
+          <stop offset="100%" stopColor="rgba(10,25,40,0.5)" />
+        </linearGradient>
+      </defs>
       <g transform="translate(10, 10)">
-        <path d="M 10 15 L 55 5" stroke="#111" strokeWidth="8" strokeLinecap="round" opacity="0.9" />
-        <path d="M 130 15 L 85 5" stroke="#111" strokeWidth="8" strokeLinecap="round" opacity="0.9" />
-        <path d="M 5 20 Q 35 18 65 22 Q 70 23 75 22 Q 105 18 135 20" stroke="#1a1a1a" strokeWidth="12" fill="none" strokeLinecap="round" />
-        <path d="M 10 22 L 15 50 Q 25 58 45 55 Q 55 50 60 25 Z" fill="#0f0f0f" stroke="#1a1a1a" strokeWidth="8" strokeLinejoin="round" />
-        <path d="M 130 22 L 125 50 Q 115 58 95 55 Q 85 50 80 25 Z" fill="#0f0f0f" stroke="#1a1a1a" strokeWidth="8" strokeLinejoin="round" />
+        {/* Temples (Kollar) */}
+        <path d="M 10 15 L 55 5" stroke="#111" strokeWidth="8" strokeLinecap="round" opacity="0.85" />
+        <path d="M 130 15 L 85 5" stroke="#111" strokeWidth="8" strokeLinecap="round" opacity="0.85" />
+        
+        {/* Top bar */}
+        <path d="M 5 20 Q 35 18 65 22 Q 70 23 75 22 Q 105 18 135 20" stroke="#181818" strokeWidth="12" fill="none" strokeLinecap="round" />
+        
+        {/* Lenses */}
+        {/* Left Lens Base */}
+        <path d="M 10 22 L 15 50 Q 25 58 45 55 Q 55 50 60 25 Z" fill="rgba(20,22,25,0.75)" stroke="#1a1a1a" strokeWidth="6" strokeLinejoin="round" style={{ backdropFilter: 'blur(1px)' }} />
+        {/* Left Lens Glare */}
+        <path d="M 10 22 L 15 50 Q 25 58 45 55 Q 55 50 60 25 Z" fill="url(#lens-glare)" />
+        
+        {/* Right Lens Base */}
+        <path d="M 130 22 L 125 50 Q 115 58 95 55 Q 85 50 80 25 Z" fill="rgba(20,22,25,0.75)" stroke="#1a1a1a" strokeWidth="6" strokeLinejoin="round" style={{ backdropFilter: 'blur(1px)' }} />
+        {/* Right Lens Glare */}
+        <path d="M 130 22 L 125 50 Q 115 58 95 55 Q 85 50 80 25 Z" fill="url(#lens-glare)" />
+        
+        {/* Bridge */}
         <path d="M 60 25 Q 70 20 80 25" stroke="#1a1a1a" strokeWidth="10" fill="none" />
-        <ellipse cx="12" cy="22" rx="4" ry="2" fill="#e5e7eb" transform="rotate(-20 12 22)" />
-        <ellipse cx="128" cy="22" rx="4" ry="2" fill="#e5e7eb" transform="rotate(20 128 22)" />
+        
+        {/* Nose pads */}
+        <ellipse cx="56" cy="34" rx="3" ry="5" fill="#e5e7eb" opacity="0.7" transform="rotate(-15 56 34)" />
+        <ellipse cx="84" cy="34" rx="3" ry="5" fill="#e5e7eb" opacity="0.7" transform="rotate(15 84 34)" />
+        
+        {/* Frame Micro Highlights */}
+        <path d="M 12 20 Q 35 18 55 22" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5" fill="none" />
+        <path d="M 85 22 Q 105 18 128 20" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5" fill="none" />
+        
+        {/* Lens edge dust / tiny smudges */}
+        <circle cx="20" cy="45" r="1.5" fill="rgba(255,255,255,0.15)" style={{ filter: 'blur(1px)' }} />
+        <circle cx="120" cy="40" r="2" fill="rgba(255,255,255,0.1)" style={{ filter: 'blur(1px)' }} />
       </g>
     </svg>
   )
 }
 
-
-
 function AirPodsSVG() {
   return (
-    <svg width="100" height="85" viewBox="0 0 60 50" style={{ filter: 'drop-shadow(6px 12px 6px rgba(0,0,0,0.3))' }}>
+    <svg width="100" height="85" viewBox="0 0 60 50" style={{ filter: 'drop-shadow(3px 5px 4px rgba(0,0,0,0.5))' }}>
+      <defs>
+        <linearGradient id="airpods-body" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="60%" stopColor="#f8f9fa" />
+          <stop offset="100%" stopColor="#e2e8f0" />
+        </linearGradient>
+      </defs>
       {/* Case */}
-      <rect x="2" y="2" width="56" height="46" rx="14" fill="#fdfcfb" stroke="#d5d5d5" strokeWidth="1" />
+      <rect x="2" y="2" width="56" height="46" rx="14" fill="url(#airpods-body)" stroke="#cbd5e1" strokeWidth="1" />
       {/* Lid line */}
-      <line x1="2" y1="14" x2="58" y2="14" stroke="#d5d5d5" strokeWidth="1" />
+      <line x1="2" y1="14" x2="58" y2="14" stroke="#94a3b8" strokeWidth="0.8" opacity="0.8" />
       {/* LED */}
-      <circle cx="30" cy="24" r="1.5" fill="#4ade80" />
-      {/* Indent */}
-      <path d="M 24 14 Q 30 18 36 14" fill="#e5e5e5" />
+      <circle cx="30" cy="24" r="1.5" fill="#4ade80" style={{ filter: 'drop-shadow(0 0 2px #4ade80)' }} />
+      {/* Indent for opening */}
+      <path d="M 24 14 Q 30 19 36 14" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="0.5" />
     </svg>
   )
 }

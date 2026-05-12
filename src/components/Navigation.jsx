@@ -14,7 +14,7 @@ export default function Navigation({ activePage, onNavigate }) {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-3"
+      className="fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-4 sm:px-8 py-3"
       style={{
         background: 'rgba(250, 247, 242, 0.92)',
         backdropFilter: 'blur(8px)',
@@ -29,7 +29,7 @@ export default function Navigation({ activePage, onNavigate }) {
         className="font-hand text-xl font-bold text-[#3d2b1f] flex items-center gap-2"
       >
         <span>✎</span>
-        <span>Eylem's Sketchbook</span>
+        <span>Eylem's Portfolio</span>
       </motion.button>
 
       {/* Nav links */}
