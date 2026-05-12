@@ -36,6 +36,7 @@ const Page = React.forwardRef((props, ref) => {
 
 export default function BookViewer() {
   const [currentIdx, setCurrentIdx] = useState(0)
+  const [bookState, setBookState] = useState('read')
   const bookRef = useRef()
 
   const onFlip = useCallback((e) => {
@@ -94,7 +95,7 @@ export default function BookViewer() {
 
         {/* MP3 Player - lives OUTSIDE DeskEnvironment so pointer-events always work */}
         {currentIdx === 0 && (
-          <div className="absolute top-[22%] left-[2%] sm:left-[5%] md:left-[7%] pointer-events-auto hidden lg:block" style={{ transform: 'rotateZ(-12deg)', zIndex: 60 }}>
+          <div className="absolute top-[22%] left-[2%] sm:left-[5%] md:left-[7%] pointer-events-auto hidden lg:block" style={{ transform: 'rotateZ(-12deg)', zIndex: bookState === 'read' ? 60 : 0 }}>
             <RetroMP3Player />
             {/* Visual cue to click */}
             <motion.div
@@ -113,21 +114,21 @@ export default function BookViewer() {
 
         {/* Vintage Stamp - lives OUTSIDE DeskEnvironment, positioned below MP3 */}
         {currentIdx === 0 && (
-          <div className="absolute top-[49%] left-[11%] hidden lg:block" style={{ transform: 'rotate(-12deg)', zIndex: 55 }}>
+          <div className="absolute top-[49%] left-[11%] hidden lg:block" style={{ transform: 'rotate(-12deg)', zIndex: bookState === 'read' ? 55 : 0 }}>
             <VintageStampSVG />
           </div>
         )}
 
         {/* Napkin Scribble - right side, outside DeskEnvironment */}
         {currentIdx === 0 && (
-          <div className="absolute top-[45%] right-[50%] hidden lg:block" style={{ transform: 'rotate(8deg)', zIndex: 45 }}>
+          <div className="absolute top-[45%] right-[50%] hidden lg:block" style={{ transform: 'rotate(8deg)', zIndex: bookState === 'read' ? 45 : 0 }}>
             <NapkinScribbleSVG />
           </div>
         )}
 
         {/* USB Hub - right side, below napkin */}
         {currentIdx === 0 && (
-          <div className="absolute top-[65%] right-[76%] hidden lg:block" style={{ transform: 'rotate(-4deg)', zIndex: 45 }}>
+          <div className="absolute top-[65%] right-[76%] hidden lg:block" style={{ transform: 'rotate(-4deg)', zIndex: bookState === 'read' ? 45 : 0 }}>
             <UsbHubSVG />
           </div>
         )}
@@ -148,8 +149,9 @@ export default function BookViewer() {
           drawShadow={true}
           flippingTime={1200}
           onFlip={onFlip}
+          onChangeState={(e) => setBookState(e.data)}
           ref={bookRef}
-          className="book-container drop-shadow-2xl relative z-[100]"
+          className="book-container drop-shadow-2xl relative z-50"
           style={{ margin: '0 auto', border: '1px solid #d8cdba', borderRadius: '4px' }}
         >
           {PAGES.map((p, i) => (
