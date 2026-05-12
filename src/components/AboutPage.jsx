@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { cvApi } from '../api/cv'
+import { usePageTracking, useAnalytics } from '../hooks/useAnalytics'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -9,6 +11,14 @@ const fadeUp = {
 }
 
 export default function AboutPage() {
+  usePageTracking('about')
+  const { trackClick } = useAnalytics()
+
+  const handleCvDownload = () => {
+    trackClick('cv_download', 'about')
+    window.open(cvApi.getDownloadUrl(), '_blank')
+  }
+
   return (
     <div className="min-h-screen py-12 px-4 relative" style={{ background: '#faf7f2' }}>
       {/* Notebook lines */}
@@ -183,8 +193,28 @@ export default function AboutPage() {
               ))}
             </motion.div>
 
+            {/* CV Download button */}
+            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={4} className="mt-4">
+              <motion.button
+                onClick={handleCvDownload}
+                whileHover={{ scale: 1.04, rotate: -1 }}
+                whileTap={{ scale: 0.97 }}
+                className="relative font-hand text-xl font-bold px-5 py-2.5 rounded-lg"
+                style={{
+                  background: '#C8F0DC',
+                  border: '2px solid #8fd4aa',
+                  boxShadow: '3px 4px 0 rgba(0,0,0,0.1)',
+                  color: '#3d2b1f',
+                  cursor: 'pointer',
+                }}
+              >
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 tape w-10 h-3 rotate-[3deg]" />
+                ↓ download CV ✎
+              </motion.button>
+            </motion.div>
+
             {/* Skills quick view */}
-            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={4} className="relative mt-4">
+            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={5} className="relative mt-4">
               <h3 className="font-hand text-2xl text-[#3d2b1f] mb-4 flex items-center gap-2">
                 quick stack
                 <svg width="40" height="16" viewBox="0 0 40 16">

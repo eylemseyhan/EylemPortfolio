@@ -1,59 +1,12 @@
 import { motion } from 'framer-motion'
-
-const skillCategories = [
-  {
-    label: 'Backend',
-    marker: '✎',
-    color: 'mint',
-    bg: '#C8F0DC',
-    border: '#8fd4aa',
-    skills: ['C#', '.NET Core', '.NET MVC', 'RabbitMQ', 'Entity Framework', 'REST API'],
-  },
-  {
-    label: 'Frontend',
-    marker: '✿',
-    color: 'lavender',
-    bg: '#E0D4F7',
-    border: '#b8a8e0',
-    skills: ['React', 'HTML', 'CSS', 'Bootstrap'],
-  },
-  {
-    label: 'Databases',
-    marker: '◈',
-    color: 'peach',
-    bg: '#FFD9C0',
-    border: '#f0b898',
-    skills: ['PostgreSQL', 'SQL Server', 'Firebase Firestore'],
-  },
-  {
-    label: 'AI / ML',
-    marker: '✦',
-    color: 'babyblue',
-    bg: '#C5E8F7',
-    border: '#90c8e8',
-    skills: ['LangChain'],
-  },
-  {
-    label: 'Tools & Infra',
-    marker: '◎',
-    color: 'butter',
-    bg: '#FFF3B0',
-    border: '#e8d878',
-    skills: ['Git', 'Postman', 'ElasticSearch', 'Docker', 'Aiven', 'GitHub'],
-  },
-  {
-    label: 'Languages',
-    marker: '♡',
-    color: 'rose',
-    bg: '#FFD6E0',
-    border: '#f0a8c0',
-    skills: ['Turkish — native', 'English — B2', 'German — A2'],
-  },
-]
+import { useSkills } from '../hooks/useSkills'
+import { usePageTracking } from '../hooks/useAnalytics'
 
 const rotations = [-2, 1, -1, 2, -1.5, 0.5, -0.8, 1.2, -0.5, 1.8, -1.3, 0.7, -2.1, 1.5, -0.3]
 
 export default function SkillsPage() {
+  const { skillCategories } = useSkills()
+  usePageTracking('skills')
   return (
     <div className="min-h-screen py-12 px-4 relative" style={{ background: '#faf7f2' }}>
       {/* Notebook lines */}

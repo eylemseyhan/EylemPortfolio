@@ -63,7 +63,7 @@ export default function ProjectCard({ project }) {
 
       {/* Stack tags */}
       <div className="flex flex-wrap gap-1.5 mb-4">
-        {project.stack.map((s, i) => (
+        {(project.technologies ?? project.stack ?? []).map((s, i) => (
           <span key={i} className="font-nunito text-xs px-2 py-0.5 rounded-full"
             style={{
               background: 'rgba(255,255,255,0.65)',
@@ -77,7 +77,7 @@ export default function ProjectCard({ project }) {
 
       {/* GitHub button */}
       <motion.a
-        href={`https://${project.github}`}
+        href={project.gitHubUrl ?? (project.github ? `https://${project.github}` : '#')}
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.05 }}
