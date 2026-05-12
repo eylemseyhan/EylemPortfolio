@@ -164,7 +164,7 @@ export default function AboutPage() {
               {[
                 { emoji: '♦', text: 'Edirne / İstanbul', color: '#FFD9C0' },
                 { emoji: '✦', text: 'Trakya Univ, 2025', color: '#E0D4F7' },
-                { emoji: '◈', text: 'Backend Dev @ Senswise', color: '#C8F0DC' },
+                { emoji: '◈', text: 'Fullstack Developer', color: '#C8F0DC' },
                 { emoji: '○', text: 'EN / DE / TR', color: '#C5E8F7' },
               ].map((s, i) => (
                 <motion.div
@@ -181,6 +181,45 @@ export default function AboutPage() {
                   {s.emoji} {s.text}
                 </motion.div>
               ))}
+            </motion.div>
+
+            {/* Skills quick view */}
+            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={4} className="relative mt-4">
+              <h3 className="font-hand text-2xl text-[#3d2b1f] mb-4 flex items-center gap-2">
+                quick stack
+                <svg width="40" height="16" viewBox="0 0 40 16">
+                  <path d="M2 10 Q15 4 35 10" stroke="#c8b8a0" strokeWidth="2" fill="none" strokeLinecap="round" />
+                </svg>
+              </h3>
+              <div className="flex flex-wrap gap-2 w-full lg:w-48">
+                {[
+                  { label: '.NET Core', bg: '#C8F0DC' },
+                  { label: 'C#', bg: '#C8F0DC' },
+                  { label: 'RabbitMQ', bg: '#C8F0DC' },
+                  { label: 'PostgreSQL', bg: '#FFD9C0' },
+                  { label: 'ElasticSearch', bg: '#FFD9C0' },
+                  { label: 'React', bg: '#E0D4F7' },
+                  { label: 'Python', bg: '#C5E8F7' },
+                  { label: 'Swift', bg: '#FFD6E0' },
+                ].map((skill, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.05, rotate: 2 }}
+                    className="relative paper-scrap"
+                    style={{
+                      transform: `rotate(${(i % 3 - 1) * 1.5}deg)`,
+                    }}
+                  >
+                    <div className="absolute -top-1.5 left-1 tape w-5 h-2" style={{ transform: `rotate(${[-10, 12, -15][i % 3]}deg)` }} />
+                    <span
+                      className="font-nunito text-xs font-semibold px-2 py-1 block lowercase-all"
+                      style={{ background: skill.bg }}
+                    >
+                      {skill.label}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           </div>
 
@@ -250,59 +289,7 @@ export default function AboutPage() {
               ))}
             </motion.div>
 
-            {/* Skills quick view */}
-            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={4} className="relative">
-              {/* Doodle rain behind skills */}
-              <div className="absolute -left-12 top-0 text-[#c8b8a0] opacity-40 flex flex-col gap-4 text-xs pointer-events-none">
-                <span>✦</span>
-                <span className="ml-4">✧</span>
-                <span>✕</span>
-                <span className="ml-2">〰️</span>
-              </div>
 
-              <h3 className="font-hand text-2xl text-[#3d2b1f] mb-6 flex items-center gap-2">
-                quick stack
-                <svg width="40" height="16" viewBox="0 0 40 16">
-                  <path d="M2 10 Q15 4 35 10" stroke="#c8b8a0" strokeWidth="2" fill="none" strokeLinecap="round" />
-                </svg>
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {[
-                  { label: '.NET Core', bg: '#C8F0DC' },
-                  { label: 'C#', bg: '#C8F0DC' },
-                  { label: 'RabbitMQ', bg: '#C8F0DC' },
-                  { label: 'PostgreSQL', bg: '#FFD9C0' },
-                  { label: 'ElasticSearch', bg: '#FFD9C0' },
-                  { label: 'React', bg: '#E0D4F7' },
-                  { label: 'Python', bg: '#C5E8F7' },
-                  { label: 'Swift', bg: '#FFD6E0' },
-                ].map((skill, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05, rotate: 2 }}
-                    className="relative paper-scrap"
-                    style={{
-                      transform: `rotate(${(i % 3 - 1) * 1.5}deg)`,
-                    }}
-                  >
-                    <div className="absolute -top-1.5 left-1 tape w-5 h-2" style={{ transform: `rotate(${[-10, 12, -15][i % 3]}deg)` }} />
-                    <span
-                      className="font-nunito text-xs font-semibold px-3 py-1.5 block lowercase-all"
-                      style={{ background: skill.bg }}
-                    >
-                      {skill.label}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Hand-drawn arrow to skills section */}
-            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={5}
-              className="mt-6 flex items-center gap-2">
-
-
-            </motion.div>
           </div>
         </div>
       </div>

@@ -149,7 +149,7 @@ export default function BookViewer() {
           flippingTime={1200}
           onFlip={onFlip}
           ref={bookRef}
-          className="book-container drop-shadow-2xl"
+          className="book-container drop-shadow-2xl relative z-[100]"
           style={{ margin: '0 auto', border: '1px solid #d8cdba', borderRadius: '4px' }}
         >
           {PAGES.map((p, i) => (
