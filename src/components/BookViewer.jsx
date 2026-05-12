@@ -72,17 +72,14 @@ export default function BookViewer() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="min-h-screen relative flex flex-col"
       style={{
-        backgroundColor: '#5c4033', // Dark walnut wood base
-        backgroundImage: `
-          radial-gradient(circle at 50% 30%, rgba(255, 240, 210, 0.25) 0%, rgba(15, 10, 5, 0.85) 100%),
-          repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(0,0,0,0.06) 80px, rgba(0,0,0,0.06) 82px),
-          repeating-linear-gradient(90deg, transparent, transparent 120px, rgba(0,0,0,0.03) 120px, rgba(0,0,0,0.03) 122px)
-        `
+        backgroundImage: 'url("/wood-desk.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
       }}
     >
-      {/* Realism: Wood & Dust Texture Overlays */}
-      <div className="absolute inset-0 pointer-events-none z-0 mix-blend-multiply opacity-[0.25]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/wood-pattern.png")' }} />
-      <div className="absolute inset-0 pointer-events-none z-0 mix-blend-overlay opacity-[0.3]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }} />
+      {/* Dark vignette overlay for depth */}
+      <div className="absolute inset-0 pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%)' }} />
 
       <Navigation
         activePage={PAGES[currentIdx]?.id || 'cover'}

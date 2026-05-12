@@ -31,7 +31,9 @@ export default function CoverPage() {
 
 
         {/* --- PHOTO & MAP CUTOUTS --- */}
-        <PolaroidCamera style={{ top: '8%', left: '18%', transform: 'rotate(-8deg)' }} />
+
+
+
         <EdirneMap style={{ bottom: '10%', right: '12%', transform: 'rotate(8deg)' }} />
 
 
@@ -39,22 +41,17 @@ export default function CoverPage() {
         <motion.div className="absolute bottom-[28%] right-12 z-20"
           animate={{ y: [0, -8, 0], rotate: [1, -2, 1] }}
           transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}>
-          <PencilSVG />
+
         </motion.div>
 
         <motion.div className="absolute bottom-8 left-[35%]"
           animate={{ y: [0, -6, 0], rotate: [-1, 3, -1] }}
           transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut', delay: 1 }}>
-          <CodeBracketsSVG />
+
         </motion.div>
 
         {/* --- COLORED PEN DOODLES (New) --- */}
-        <div className="absolute top-[25%] right-[8%] rotate-12 opacity-80 pointer-events-none"><DoodleHeart /></div>
-        <div className="absolute bottom-[45%] left-[8%] -rotate-12 opacity-80 pointer-events-none"><DoodleLightbulb /></div>
-        <div className="absolute top-[45%] right-[5%] rotate-45 opacity-80 pointer-events-none"><DoodleKey /></div>
-        <div className="absolute bottom-[20%] left-[25%] rotate-[20deg] opacity-80 pointer-events-none"><DoodleClock /></div>
-        <div className="absolute top-[18%] left-[45%] -rotate-[15deg] opacity-80 pointer-events-none"><DoodleArrow color="#ec4899" /></div>
-        <div className="absolute bottom-[25%] right-[28%] rotate-[165deg] opacity-80 pointer-events-none"><DoodleArrow color="#3b82f6" /></div>
+
 
         {/* --- STARS --- */}
         <motion.span className="absolute top-32 left-16 text-yellow-300 text-3xl pointer-events-none"
@@ -68,7 +65,6 @@ export default function CoverPage() {
         <TornTerminalPaper style={{ top: '12%', right: '14%', transform: 'rotate(7deg)' }} />
 
 
-        {/* --- TITLE BLOCK --- */}
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20">
           <div className="relative">
             <h1 className="font-sketch text-6xl sm:text-8xl font-bold text-amber-50 leading-tight"
@@ -125,6 +121,8 @@ export default function CoverPage() {
 
 /* --- NEW TACTILE ELEMENTS --- */
 
+
+
 function TornTerminalPaper({ style }) {
   return (
     <div className="absolute z-10 pointer-events-auto" style={{ width: 150, height: 100, ...style }}>
@@ -154,50 +152,9 @@ function TornTerminalPaper({ style }) {
 
 
 
-function ScrapPostIt({ text, color, tapeClass, style }) {
-  return (
-    <div className="absolute paper-scrap p-3 w-40 z-10 flex items-center justify-center min-h-[80px]" style={{ background: color, boxShadow: '2px 3px 8px rgba(0,0,0,0.1)', ...style }}>
-      <div className={`absolute -top-3 left-1/2 -translate-x-1/2 tape w-14 h-5 ${tapeClass}`} style={{ transform: 'rotate(-2deg)' }} />
-      <div className="font-hand lowercase-all text-xl font-bold leading-tight text-[#3d2b1f] text-center">{text}</div>
-    </div>
-  )
-}
 
-function PolaroidCamera({ style }) {
-  return (
-    <div className="absolute shadow-lg z-10" style={{ width: 120, height: 140, border: '2px solid #dcd0c0', background: '#fffef9', ...style }}>
-      <div className="absolute -top-3 left-3 tape tape-blue w-14 h-5 rotate-[8deg]" />
-      {/* Photo area */}
-      <div className="w-full" style={{ height: 100, background: 'linear-gradient(135deg, #fef3c7 0%, #dbeafe 50%, #fce7f3 100%)', position: 'relative', overflow: 'hidden' }}>
-        {/* Camera doodle inside photo */}
-        <svg width="120" height="100" viewBox="0 0 120 100" fill="none" style={{ position: 'absolute', inset: 0 }}>
-          {/* Sky */}
-          <rect width="120" height="100" fill="#bfdbfe" opacity="0.4" />
-          {/* Sun */}
-          <circle cx="95" cy="18" r="12" fill="#fde68a" opacity="0.9" />
-          {/* Hills */}
-          <ellipse cx="30" cy="95" rx="40" ry="25" fill="#bbf7d0" opacity="0.8" />
-          <ellipse cx="90" cy="98" rx="45" ry="22" fill="#a7f3d0" opacity="0.7" />
-          {/* Camera icon */}
-          <rect x="40" y="35" width="40" height="30" rx="4" fill="#1e293b" opacity="0.85" />
-          <circle cx="60" cy="50" r="9" fill="#374151" stroke="#60a5fa" strokeWidth="2" />
-          <circle cx="60" cy="50" r="5" fill="#1e40af" />
-          <circle cx="60" cy="50" r="2" fill="#93c5fd" />
-          <rect x="52" y="31" width="10" height="6" rx="2" fill="#334155" />
-          <circle cx="73" cy="40" r="2" fill="#ef4444" />
-        </svg>
-      </div>
-      {/* Caption area */}
-      <div style={{ height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <span className="font-hand text-sm font-bold text-[#7a5a38]">📷 memories</span>
-      </div>
-    </div>
-  )
-}
 
-// ... (Önceki import ve ana komponent yapısı aynı kalacak)
 
-/* --- GÜNCELLEMİŞ EDİRNE PULU KOMPONENTİ --- */
 
 function EdirneMap({ style }) {
   return (
@@ -216,15 +173,52 @@ function EdirneMap({ style }) {
 }
 
 /* --- SVG Doodles (Scribble/Hand-drawn style) --- */
-function DoodleHeart() {
+function HeartPendant() {
   return (
-    <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
-      {/* hand-drawn heart — slightly wobbly, sketchy double stroke */}
-      <path d="M25 38 C14 28 6 22 7 14 C8 7 14 5 19 8 C21 9 23 11 25 13 C27 11 29 9 31 8 C36 5 42 7 43 14 C44 22 36 28 25 38 Z"
-        fill="#fecaca" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      {/* second rough pass for sketch feel */}
-      <path d="M25 37 C14.5 27.5 6.5 22.5 7.5 14.5 C8.5 8 13.5 6 18.5 8.5"
-        fill="none" stroke="#ef4444" strokeWidth="0.8" strokeLinecap="round" opacity="0.4" />
+    <svg width="72" height="90" viewBox="0 0 72 90" fill="none" style={{ filter: 'drop-shadow(3px 5px 8px rgba(0,0,0,0.45))' }}>
+      <defs>
+        <linearGradient id="gold-pendant" x1="10%" y1="0%" x2="90%" y2="100%">
+          <stop offset="0%" stopColor="#f9e4a0" />
+          <stop offset="25%" stopColor="#e8c860" />
+          <stop offset="50%" stopColor="#c8960c" />
+          <stop offset="72%" stopColor="#e8c860" />
+          <stop offset="100%" stopColor="#a07008" />
+        </linearGradient>
+        <linearGradient id="gold-ring" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f5dc78" />
+          <stop offset="50%" stopColor="#b8860b" />
+          <stop offset="100%" stopColor="#f5dc78" />
+        </linearGradient>
+        <radialGradient id="gold-shine" cx="35%" cy="30%" r="55%">
+          <stop offset="0%" stopColor="rgba(255,255,230,0.6)" />
+          <stop offset="100%" stopColor="rgba(255,255,230,0)" />
+        </radialGradient>
+      </defs>
+
+      {/* Chain links above ring */}
+      <path d="M36 2 Q36 0 36 0" stroke="#d4a800" strokeWidth="1.5" strokeLinecap="round" />
+      <ellipse cx="36" cy="5" rx="3" ry="5" fill="none" stroke="url(#gold-ring)" strokeWidth="2.2" />
+
+      {/* Jump ring connecting chain to pendant */}
+      <ellipse cx="36" cy="13" rx="4.5" ry="3" fill="none" stroke="url(#gold-ring)" strokeWidth="2.5" />
+
+      {/* Heart pendant body */}
+      <path d="M36 78 C20 63 6 54 7 38 C8 24 16 18 24 20 C28 21 32 24 36 29 C40 24 44 21 48 20 C56 18 64 24 65 38 C66 54 52 63 36 78 Z"
+        fill="url(#gold-pendant)" stroke="#a07008" strokeWidth="1.2" />
+
+      {/* Shine overlay */}
+      <path d="M36 78 C20 63 6 54 7 38 C8 24 16 18 24 20 C28 21 32 24 36 29 C40 24 44 21 48 20 C56 18 64 24 65 38 C66 54 52 63 36 78 Z"
+        fill="url(#gold-shine)" />
+
+      {/* Specular highlight */}
+      <path d="M20 32 C20 26 25 22 30 22" stroke="rgba(255,255,220,0.75)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+
+      {/* Engraving line detail */}
+      <path d="M36 70 C24 57 14 51 15 40 C16 32 21 28 27 29"
+        stroke="rgba(100,70,0,0.3)" strokeWidth="1" strokeLinecap="round" fill="none" />
+
+      {/* Edge shine on right side */}
+      <path d="M57 36 C60 44 56 56 48 66" stroke="rgba(255,240,160,0.4)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
     </svg>
   )
 }
@@ -315,29 +309,6 @@ function TapeCorner({ position }) {
 }
 
 
-function PencilSVG() {
-  return (
-    <svg width="65" height="65" viewBox="0 0 50 50" fill="none">
-      {/* Pencil body - rotated, slightly wobbly quad */}
-      <path d="M18 4 C20 3 30 7 31 9 C32 27 30 32 28 34 C26 35 20 33 18 32 C16 30 14 25 16 6 Z"
-        fill="#fde68a" stroke="#92400e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      {/* Eraser band */}
-      <path d="M18 5 C20 4 30 8 31 10 L30 13 C28 12 20 9 18 9 Z"
-        fill="#fca5a5" stroke="#92400e" strokeWidth="1" />
-      {/* Eraser top */}
-      <path d="M18 4 C20 3 30 7 31 9 L30 7 C28 6 20 3 18 4"
-        fill="#f9a8d4" stroke="#92400e" strokeWidth="1" />
-      {/* Wood tip */}
-      <path d="M18 32 C19 33 27 35 28 34 L25 44 Z"
-        fill="#d4a76a" stroke="#92400e" strokeWidth="1.5" strokeLinejoin="round" />
-      {/* Lead point */}
-      <path d="M23 42 L25 44 L27 42" fill="#374151" stroke="#374151" strokeWidth="0.8" strokeLinejoin="round" />
-      {/* Grain line on body */}
-      <path d="M19 15 C21 15 29 17 30 17" fill="none" stroke="#92400e" strokeWidth="0.7" strokeLinecap="round" opacity="0.4" />
-      <path d="M19 20 C21 20 29 22 30 22" fill="none" stroke="#92400e" strokeWidth="0.7" strokeLinecap="round" opacity="0.3" />
-    </svg>
-  )
-}
 
 function CodeBracketsSVG() {
   return (
