@@ -34,7 +34,9 @@ export default function CoverPage() {
 
 
 
-        <EdirneMap style={{ bottom: '10%', right: '12%', transform: 'rotate(8deg)' }} />
+        <div className="hidden sm:block">
+          <EdirneMap style={{ bottom: '10%', right: '12%', transform: 'rotate(8deg)' }} />
+        </div>
 
 
 
@@ -62,36 +64,42 @@ export default function CoverPage() {
           animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}>✧</motion.span>
 
         {/* --- NEW TACTILE ELEMENTS --- */}
-        <TornTerminalPaper style={{ top: '12%', right: '14%', transform: 'rotate(7deg)' }} />
+        <div className="hidden sm:block">
+          <TornTerminalPaper style={{ top: '12%', right: '14%', transform: 'rotate(7deg)' }} />
+        </div>
 
 
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20">
           <div className="relative">
-            <h1 className="font-sketch text-6xl sm:text-8xl font-bold text-amber-50 leading-tight"
+            <h1 className="font-sketch text-5xl sm:text-6xl md:text-8xl font-bold text-amber-50 leading-tight"
               style={{ textShadow: '3px 4px 0 rgba(0,0,0,0.2)' }}>
               Eylem's
             </h1>
-            <h1 className="font-sketch text-6xl sm:text-8xl font-bold text-amber-50 leading-tight pb-4"
+            <h1 className="font-sketch text-5xl sm:text-6xl md:text-8xl font-bold text-amber-50 leading-tight pb-4"
               style={{ textShadow: '3px 4px 0 rgba(0,0,0,0.2)', transform: 'rotate(-2deg)' }}>
               Portfolio
             </h1>
             {/* Wavy underline */}
-            <svg width="280" height="24" viewBox="0 0 280 20" className="absolute -bottom-4 left-10">
+            <svg width="280" height="24" viewBox="0 0 280 20" className="absolute -bottom-4 left-10 hidden sm:block">
               <path d="M5 12 Q70 5 140 12 Q210 19 275 10" stroke="#fde68a" strokeWidth="4" fill="none"
+                strokeLinecap="round" style={{ filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.3))' }} />
+            </svg>
+            <svg width="180" height="20" viewBox="0 0 200 20" className="absolute -bottom-2 left-6 sm:hidden">
+              <path d="M5 12 Q50 5 100 12 Q150 19 195 10" stroke="#fde68a" strokeWidth="4" fill="none"
                 strokeLinecap="round" style={{ filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.3))' }} />
             </svg>
           </div>
 
           {/* Subtitle */}
-          <p className="font-hand text-[#faf7f2] text-xl sm:text-2xl mt-6 opacity-95" style={{ transform: 'rotate(1deg)' }}>
+          <p className="font-hand text-[#faf7f2] text-lg sm:text-xl md:text-2xl mt-4 sm:mt-6 opacity-95 text-center px-4" style={{ transform: 'rotate(1deg)' }}>
             a digital scrapbook of my coding adventures ✿
           </p>
 
 
 
           {/* --- STICKERS --- */}
-          <div className="flex gap-4 mt-8">
-            <div className="px-4 py-2 rounded-lg font-hand text-xl text-amber-950 font-bold"
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-6 sm:mt-8 px-4">
+            <div className="px-3 sm:px-4 py-1 sm:py-2 rounded-lg font-hand text-lg sm:text-xl text-amber-950 font-bold"
               style={{
                 background: '#fde68a',
                 border: '2px solid rgba(120,80,20,0.4)',
@@ -100,7 +108,7 @@ export default function CoverPage() {
               }}>
               let it happen.
             </div>
-            <div className="px-4 py-2 rounded-lg font-hand text-xl text-emerald-950 font-bold"
+            <div className="px-3 sm:px-4 py-1 sm:py-2 rounded-lg font-hand text-lg sm:text-xl text-emerald-950 font-bold"
               style={{
                 background: '#a7f3d0',
                 border: '2px solid rgba(20,100,60,0.4)',
