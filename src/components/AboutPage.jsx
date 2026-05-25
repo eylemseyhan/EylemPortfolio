@@ -265,7 +265,7 @@ export default function AboutPage() {
                 hey! i'm eylem ✿
               </p>
               <p className="font-nunito text-[#5a4a3a] text-lg leading-relaxed mt-2">
-                backend developer from türkiye, obsessed with clean code,
+                Fullstack Developer from Türkiye, obsessed with clean code,
                 scalable systems, and making things actually work ✎
               </p>
               {/* Corner decoration */}
