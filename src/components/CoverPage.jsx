@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 export default function CoverPage() {
   return (
-    <div className="w-full h-full flex items-center justify-center relative overflow-hidden"
+    <div className="w-full h-full min-h-[100vh] lg:min-h-[100%] flex items-center justify-center relative overflow-hidden"
       style={{
         background: 'linear-gradient(145deg, #b5906a 0%, #9a7550 30%, #c4a07a 60%, #a88060 100%)',
       }}>

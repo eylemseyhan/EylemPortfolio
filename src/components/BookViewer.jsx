@@ -39,34 +39,76 @@ const Page = React.forwardRef((props, ref) => {
 export default function BookViewer() {
   const [currentIdx, setCurrentIdx] = useState(0)
   const [bookState, setBookState] = useState('read')
+  const [isMobile, setIsMobile] = useState(false)
   const bookRef = useRef()
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const onFlip = useCallback((e) => {
     setCurrentIdx(e.data)
   }, [])
 
   const goTo = useCallback((idx) => {
+    if (isMobile) {
+      const pageId = PAGES[idx]?.id;
+      if (pageId) {
+        document.getElementById(`mobile-section-${pageId}`)?.scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
+    }
     if (idx < 0 || idx >= PAGES.length) return
     bookRef.current?.pageFlip()?.turnToPage(idx)
-  }, [])
+  }, [isMobile])
 
   const goNext = useCallback(() => {
-    bookRef.current?.pageFlip()?.flipNext()
-  }, [])
+    if (!isMobile) bookRef.current?.pageFlip()?.flipNext()
+  }, [isMobile])
 
   const goPrev = useCallback(() => {
-    bookRef.current?.pageFlip()?.flipPrev()
-  }, [])
+    if (!isMobile) bookRef.current?.pageFlip()?.flipPrev()
+  }, [isMobile])
 
   // Fix window resize to update flipbook
   useEffect(() => {
     const handleResize = () => {
-      bookRef.current?.pageFlip()?.update()
+      if (!isMobile) bookRef.current?.pageFlip()?.update()
     }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [isMobile])
 
+  // --- MOBILE RENDER ---
+  if (isMobile) {
+    const mobilePages = PAGES.filter(p => !['inside', 'back', 'backcover'].includes(p.id));
+    return (
+      <div className="min-h-screen flex flex-col bg-[#faf7f2] overflow-x-hidden" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/paper-fibers.png")' }}>
+        <Navigation
+          activePage={'cover'} 
+          onNavigate={(id) => {
+            document.getElementById(`mobile-section-${id}`)?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+        <div className="flex-1 w-full flex flex-col pt-16">
+          {mobilePages.map((p, i) => (
+            <div key={i} id={`mobile-section-${p.id}`} className="w-full relative border-b-2 border-[#dcd0c0] min-h-[100vh]">
+              <p.Component onNavigate={(id) => {
+                document.getElementById(`mobile-section-${id}`)?.scrollIntoView({ behavior: 'smooth' });
+              }} />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // --- DESKTOP RENDER ---
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
