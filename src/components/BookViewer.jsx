@@ -4,6 +4,7 @@ import HTMLFlipBook from 'react-pageflip'
 import CoverPage from './CoverPage'
 import AboutPage from './AboutPage'
 import TimelinePage from './TimelinePage'
+import TimelineExperiencePage from './TimelineExperiencePage'
 import ProjectsPage from './ProjectsPage'
 import SkillsPage from './SkillsPage'
 import ContactPage from './ContactPage'
@@ -15,6 +16,7 @@ const PAGES = [
   { id: 'inside', label: '', Component: InsideCover, density: 'hard' },
   { id: 'about', label: 'About', Component: AboutPage, density: 'soft' },
   { id: 'timeline', label: 'Journey', Component: TimelinePage, density: 'soft' },
+  { id: 'experience', label: 'Experience', Component: TimelineExperiencePage, density: 'soft' },
   { id: 'projects', label: 'Projects', Component: ProjectsPage, density: 'soft' },
   { id: 'skills', label: 'Skills', Component: SkillsPage, density: 'soft' },
   { id: 'contact', label: 'Contact', Component: ContactPage, density: 'soft' },
@@ -72,17 +74,14 @@ export default function BookViewer() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="min-h-screen relative flex flex-col"
       style={{
-        backgroundColor: '#5c4033', // Dark walnut wood base
-        backgroundImage: `
-          radial-gradient(circle at 50% 30%, rgba(255, 240, 210, 0.25) 0%, rgba(15, 10, 5, 0.85) 100%),
-          repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(0,0,0,0.06) 80px, rgba(0,0,0,0.06) 82px),
-          repeating-linear-gradient(90deg, transparent, transparent 120px, rgba(0,0,0,0.03) 120px, rgba(0,0,0,0.03) 122px)
-        `
+        backgroundImage: 'url("/wood-desk.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
       }}
     >
-      {/* Realism: Wood & Dust Texture Overlays */}
-      <div className="absolute inset-0 pointer-events-none z-0 mix-blend-multiply opacity-[0.25]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/wood-pattern.png")' }} />
-      <div className="absolute inset-0 pointer-events-none z-0 mix-blend-overlay opacity-[0.3]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }} />
+      {/* Dark vignette overlay for depth */}
+      <div className="absolute inset-0 pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%)' }} />
 
       <Navigation
         activePage={PAGES[currentIdx]?.id || 'cover'}
@@ -158,7 +157,7 @@ export default function BookViewer() {
           onChangeState={(e) => setBookState(e.data)}
           ref={bookRef}
           className="book-container drop-shadow-2xl relative z-50"
-          style={{ margin: '0 auto', border: '1px solid #d8cdba', borderRadius: '4px' }}
+          style={{ margin: '0 auto', borderRadius: '4px' }}
         >
           {PAGES.map((p, i) => (
             <Page key={i} density={p.density}>
@@ -252,63 +251,82 @@ export default function BookViewer() {
 
 /* --- DESK ENVIRONMENT --- */
 function DeskEnvironment({ currentIdx }) {
-  // Deepen shadows and fade out heavily when reading to maintain focus on the bright pages
-  const opacity = currentIdx === 0 ? 0.95 : 0.1;
+  // Hide entirely and disable interactions when reading
+  const opacity = currentIdx === 0 ? 0.95 : 0;
+  const pointerClass = currentIdx === 0 ? "pointer-events-auto" : "pointer-events-none";
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-0 hidden lg:block transition-opacity duration-1000" style={{ opacity }}>
+    <div className="absolute inset-0 pointer-events-none hidden lg:block transition-opacity duration-1000" style={{ opacity, zIndex: 60 }}>
       <div className="relative w-full h-full max-w-[1200px] mx-auto">
 
-        {/* Coffee Cup with Steam (top-left) */}
-        <motion.div className="absolute top-[8%] left-[3%]"
-          animate={{ y: [0, -3, 0], rotate: [-15, -14.5, -15] }} transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}>
+        {/* Coffee Cup */}
+        <motion.div
+          className={`absolute top-[8%] left-[3%] cursor-pointer group ${pointerClass}`}
+          initial={{ rotate: -15 }}
+          whileHover={{ rotate: -25, scale: 1.12, y: -10, transition: { type: 'spring', stiffness: 350, damping: 12 } }}
+        >
           <CoffeeRing />
-          <div className="absolute top-2 left-3">
-            <CoffeeMug />
+          <div className="absolute top-2 left-3"><CoffeeMug /></div>
+          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap font-hand text-sm text-[#fde68a] bg-black/60 px-2 py-0.5 rounded pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            ☕ third cup of the day
           </div>
         </motion.div>
 
-        {/* Crumpled Paper */}
-        <motion.div className="absolute top-[40%] right-[3%]"
-          animate={{ y: [0, 2, 0], rotate: [35, 36, 35] }} transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut' }}>
-          <CrumpledPaperSVG />
-        </motion.div>
+
 
         {/* Pink Sticky Note */}
-        <motion.div className="absolute top-[18%] left-[25%]"
-          animate={{ y: [0, -2, 0], rotate: [14, 15, 14] }} transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}>
+        <motion.div
+          className="absolute top-[18%] left-[25%] pointer-events-none"
+          initial={{ rotate: 14 }}
+        >
           <div className="paper-scrap p-4 w-44 flex flex-col items-center relative overflow-hidden" style={{ background: '#fce4ec', filter: 'drop-shadow(2px 3px 2px rgba(0,0,0,0.2))' }}>
             <div className="absolute inset-0 pointer-events-none mix-blend-multiply opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/paper-fibers.png")' }} />
             <div className="absolute -top-3 tape tape-stripes w-14 h-6 rotate-[-8deg] z-10" style={{ filter: 'drop-shadow(1px 2px 1px rgba(0,0,0,0.15))' }} />
             <span className="font-hand text-3xl font-bold text-pink-500 mt-2 text-center leading-tight relative z-10">don't forget<br />to commit!</span>
-            {/* Paper curl imperfection */}
             <div className="absolute bottom-0 right-0 w-8 h-8 bg-pink-200 opacity-40 shadow-inner rounded-tl-full" style={{ transform: 'rotate(-5deg)' }} />
           </div>
         </motion.div>
 
-        {/* Ray-Ban Sunglasses */}
-        <motion.div className="absolute top-[62%] left-[20%]"
-          animate={{ y: [0, 1.5, 0], rotate: [-12, -11.5, -12] }} transition={{ repeat: Infinity, duration: 8, ease: 'easeInOut' }}>
-          <RaybanSVG />
-        </motion.div>
-
         {/* Fineliner Pen */}
-        <motion.div className="absolute bottom-[20%] left-[30%]"
-          animate={{ y: [0, -1, 0], rotate: [-70, -69, -70] }} transition={{ repeat: Infinity, duration: 5.5, ease: 'easeInOut' }}>
+        <motion.div
+          className={`absolute bottom-[20%] left-[30%] cursor-pointer group ${pointerClass}`}
+          initial={{ rotate: -70 }}
+          whileHover={{ rotate: -50, x: 20, scale: 1.08, transition: { type: 'spring', stiffness: 220, damping: 14 } }}
+        >
           <FinelinerSVG />
+          <div className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap font-hand text-sm text-[#fde68a] bg-black/60 px-2 py-0.5 rounded pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            ✏️ always annotating
+          </div>
         </motion.div>
 
         {/* AirPods Case */}
-        <motion.div className="absolute bottom-[45%] left-[20%]"
-          animate={{ y: [0, 2, 0], rotate: [25, 26, 25] }} transition={{ repeat: Infinity, duration: 6.5, ease: 'easeInOut' }}>
+        <motion.div
+          className={`absolute bottom-[45%] left-[20%] cursor-pointer group ${pointerClass}`}
+          initial={{ rotate: 25 }}
+          whileHover={{ scale: 1.2, rotate: -5, y: -10, transition: { type: 'spring', stiffness: 400, damping: 10 } }}
+        >
           <AirPodsSVG />
+          <div className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap font-hand text-sm text-[#fde68a] bg-black/60 px-2 py-0.5 rounded pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            🎧 lofi study mode
+          </div>
         </motion.div>
-        
-        {/* Scattered Paperclips */}
-        <motion.div className="absolute top-[65%] left-[38%]" animate={{ rotate: [45, 47, 45] }} transition={{ repeat: Infinity, duration: 10 }}>
+
+        {/* Paperclips */}
+        <motion.div
+          className={`absolute top-[65%] right-[8%] cursor-pointer group ${pointerClass}`}
+          initial={{ rotate: 45 }}
+          whileHover={{ rotate: 225, scale: 1.4, transition: { type: 'spring', stiffness: 300, damping: 7 } }}
+        >
           <PaperclipSVG style={{}} />
+          <div className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap font-hand text-sm text-[#fde68a] bg-black/60 px-2 py-0.5 rounded pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            clip everything 📎
+          </div>
         </motion.div>
-        <motion.div className="absolute top-[70%] left-[35%]" animate={{ rotate: [-20, -18, -20] }} transition={{ repeat: Infinity, duration: 9 }}>
+        <motion.div
+          className={`absolute top-[70%] right-[11%] cursor-pointer ${pointerClass}`}
+          initial={{ rotate: -20 }}
+          whileHover={{ rotate: 160, scale: 1.4, transition: { type: 'spring', stiffness: 300, damping: 7 } }}
+        >
           <PaperclipSVG style={{}} />
         </motion.div>
 
@@ -392,25 +410,25 @@ function CoffeeMug() {
           <feComposite in="coloredNoise" in2="SourceGraphic" operator="in" />
         </filter>
       </defs>
-      
+
       {/* Handle with shadow */}
       <path d="M 70 30 C 95 30 95 70 70 70" fill="none" stroke="#e8dfce" strokeWidth="12" strokeLinecap="round" style={{ filter: 'drop-shadow(0 12px 10px rgba(0,0,0,0.25))' }} />
       <path d="M 70 30 C 95 30 95 70 70 70" fill="none" stroke="url(#ceramic-grad)" strokeWidth="12" strokeLinecap="round" />
-      
+
       {/* Cup body */}
       <circle cx="50" cy="50" r="40" fill="url(#ceramic-grad)" stroke="#d4c9b8" strokeWidth="1" />
       <circle cx="50" cy="50" r="39" fill="url(#cup-inner)" />
-      
+
       {/* Coffee liquid */}
       <circle cx="50" cy="50" r="34" fill="url(#coffee-grad)" />
-      
+
       {/* Coffee oil variation & noise overlay */}
       <circle cx="50" cy="50" r="34" fill="#000" style={{ filter: 'url(#coffee-noise)', mixBlendMode: 'multiply' }} opacity="0.6" />
-      
+
       {/* Foam / Crema swirls */}
       <path d="M 25 45 Q 40 25 60 40 T 75 55" stroke="#996336" strokeWidth="3" fill="none" opacity="0.5" strokeLinecap="round" style={{ filter: 'blur(1px)' }} />
       <path d="M 35 60 Q 50 80 65 50" stroke="#b07d4f" strokeWidth="2" fill="none" opacity="0.4" strokeLinecap="round" style={{ filter: 'blur(0.5px)' }} />
-      
+
       {/* Small random crema spots */}
       <circle cx="45" cy="35" r="1.5" fill="#a67b4c" opacity="0.6" style={{ filter: 'blur(0.5px)' }} />
       <circle cx="65" cy="45" r="1" fill="#b07d4f" opacity="0.5" />
@@ -418,11 +436,11 @@ function CoffeeMug() {
 
       {/* Coffee meniscus ring */}
       <circle cx="50" cy="50" r="33.5" fill="none" stroke="#4a2105" strokeWidth="1.5" opacity="0.9" />
-      
+
       {/* Surface reflection (gloss) */}
       <path d="M 22 40 A 28 28 0 0 1 40 22" stroke="rgba(255,255,255,0.15)" strokeWidth="4" fill="none" strokeLinecap="round" style={{ filter: 'blur(1px)' }} />
       <path d="M 24 40 A 26 26 0 0 1 40 24" stroke="rgba(255,255,255,0.25)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-      
+
       {/* Cup imperfections */}
       {/* tiny stain on edge */}
       <path d="M 17 42 Q 15 45 18 48" stroke="#4a2105" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.4" />
@@ -448,55 +466,6 @@ function CoffeeRing() {
 }
 
 
-function RaybanSVG() {
-  return (
-    <svg width="300" height="170" viewBox="0 0 160 90" style={{ filter: 'drop-shadow(6px 8px 4px rgba(0,0,0,0.6))' }}>
-      <defs>
-        {/* Lens physical gradient (glass reflection) */}
-        <linearGradient id="lens-glare" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="rgba(255,255,255,0.25)" />
-          <stop offset="25%" stopColor="rgba(255,255,255,0.05)" />
-          <stop offset="50%" stopColor="rgba(255,255,255,0)" />
-          <stop offset="100%" stopColor="rgba(10,25,40,0.5)" />
-        </linearGradient>
-      </defs>
-      <g transform="translate(10, 10)">
-        {/* Temples (Kollar) */}
-        <path d="M 10 15 L 55 5" stroke="#111" strokeWidth="8" strokeLinecap="round" opacity="0.85" />
-        <path d="M 130 15 L 85 5" stroke="#111" strokeWidth="8" strokeLinecap="round" opacity="0.85" />
-        
-        {/* Top bar */}
-        <path d="M 5 20 Q 35 18 65 22 Q 70 23 75 22 Q 105 18 135 20" stroke="#181818" strokeWidth="12" fill="none" strokeLinecap="round" />
-        
-        {/* Lenses */}
-        {/* Left Lens Base */}
-        <path d="M 10 22 L 15 50 Q 25 58 45 55 Q 55 50 60 25 Z" fill="rgba(20,22,25,0.75)" stroke="#1a1a1a" strokeWidth="6" strokeLinejoin="round" style={{ backdropFilter: 'blur(1px)' }} />
-        {/* Left Lens Glare */}
-        <path d="M 10 22 L 15 50 Q 25 58 45 55 Q 55 50 60 25 Z" fill="url(#lens-glare)" />
-        
-        {/* Right Lens Base */}
-        <path d="M 130 22 L 125 50 Q 115 58 95 55 Q 85 50 80 25 Z" fill="rgba(20,22,25,0.75)" stroke="#1a1a1a" strokeWidth="6" strokeLinejoin="round" style={{ backdropFilter: 'blur(1px)' }} />
-        {/* Right Lens Glare */}
-        <path d="M 130 22 L 125 50 Q 115 58 95 55 Q 85 50 80 25 Z" fill="url(#lens-glare)" />
-        
-        {/* Bridge */}
-        <path d="M 60 25 Q 70 20 80 25" stroke="#1a1a1a" strokeWidth="10" fill="none" />
-        
-        {/* Nose pads */}
-        <ellipse cx="56" cy="34" rx="3" ry="5" fill="#e5e7eb" opacity="0.7" transform="rotate(-15 56 34)" />
-        <ellipse cx="84" cy="34" rx="3" ry="5" fill="#e5e7eb" opacity="0.7" transform="rotate(15 84 34)" />
-        
-        {/* Frame Micro Highlights */}
-        <path d="M 12 20 Q 35 18 55 22" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5" fill="none" />
-        <path d="M 85 22 Q 105 18 128 20" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5" fill="none" />
-        
-        {/* Lens edge dust / tiny smudges */}
-        <circle cx="20" cy="45" r="1.5" fill="rgba(255,255,255,0.15)" style={{ filter: 'blur(1px)' }} />
-        <circle cx="120" cy="40" r="2" fill="rgba(255,255,255,0.1)" style={{ filter: 'blur(1px)' }} />
-      </g>
-    </svg>
-  )
-}
 
 function AirPodsSVG() {
   return (
@@ -708,16 +677,43 @@ function PaperclipSVG({ style }) {
 function RetroMP3Player() {
   const [isPlaying, setIsPlaying] = React.useState(false)
   const audioRef = React.useRef(null)
+  const filterRef = React.useRef(null)
 
   React.useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = 0.5
+      // Sesi biraz açtık çünkü lowpass filtresi sesi oldukça boğuklaştırıp kısacaktır
+      audioRef.current.volume = 0.6;
+      audioRef.current.playbackRate = 1.0;
     }
   }, [])
 
   const togglePlay = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    // Müzikteki gerilim/korku hissini yok edip "yan odadan gelen chill lofi" havası vermek için Lowpass Filter ekliyoruz
+    if (!filterRef.current && audioRef.current) {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+        const source = ctx.createMediaElementSource(audioRef.current);
+        const lowpass = ctx.createBiquadFilter();
+
+        lowpass.type = 'lowpass';
+        lowpass.frequency.value = 600; // Sadece basları ve boğuk sesleri geçirir (yan oda efekti)
+
+        source.connect(lowpass);
+        lowpass.connect(ctx.destination);
+        filterRef.current = { ctx };
+      } catch (err) {
+        console.log('Web Audio Filter error:', err);
+      }
+    }
+
+    // Tarayıcı güvenlik politikası gereği context'i uyandır
+    if (filterRef.current?.ctx?.state === 'suspended') {
+      filterRef.current.ctx.resume();
+    }
 
     if (isPlaying) {
       if (audioRef.current) audioRef.current.pause();

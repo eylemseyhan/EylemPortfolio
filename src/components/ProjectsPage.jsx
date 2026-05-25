@@ -1,60 +1,11 @@
 import { motion } from 'framer-motion'
 import ProjectCard from './ProjectCard'
-
-const projects = [
-  {
-    emoji: '★',
-    title: 'Eventura',
-    type: 'Event Management Platform',
-    description: 'Event discovery by city & category, ticket purchase with QR code generation, admin panel for backend control.',
-    stack: ['.NET Core', 'Bootstrap', 'jQuery', 'PostgreSQL (Aiven)'],
-    github: 'github.com/eylemseyhan/Eventura',
-    color: 'mint',
-    rotation: -2,
-  },
-  {
-    emoji: '✦',
-    title: 'Taskify',
-    type: 'Task Management App',
-    description: 'Task creation, editing, user assignment, real-time calendar view, subtask tracking.',
-    stack: ['React', 'Firebase Firestore', 'Firebase Auth'],
-    github: 'github.com/eylemseyhan/Taskify',
-    color: 'lavender',
-    rotation: 1.5,
-  },
-  {
-    emoji: '⚡',
-    title: 'Power Plant App',
-    type: 'Energy Data Platform',
-    description: 'Power plant data management with role-based access control. Admins only for sensitive ops 🔐',
-    stack: ['.NET Core', 'EF Code First', 'SQL Server'],
-    github: 'github.com/eylemseyhan/PowerPlantApp',
-    color: 'peach',
-    rotation: -1,
-  },
-  {
-    emoji: '✎',
-    title: 'E-Registration (DSI)',
-    type: 'Sports Club Registration',
-    description: 'Online student registration, AJAX dynamic updates, real-time admin tracking.',
-    stack: ['.NET MVC', 'SQL Server', 'Bootstrap', 'AJAX'],
-    github: 'github.com/eylemseyhan/DSI-Sports-Registration',
-    color: 'babyblue',
-    rotation: 2,
-  },
-  {
-    emoji: '✿',
-    title: 'NutriTrack',
-    type: 'iOS Nutrition App',
-    description: 'Track daily meals, monitor calorie intake. iOS native with Firebase backend.',
-    stack: ['Swift', 'Firebase'],
-    github: 'github.com/eylemseyhan/NutriTrack',
-    color: 'rose',
-    rotation: -1.5,
-  },
-]
+import { useProjects } from '../hooks/useProjects'
+import { usePageTracking } from '../hooks/useAnalytics'
 
 export default function ProjectsPage() {
+  const { projects } = useProjects()
+  usePageTracking('projects')
   return (
     <div className="min-h-screen py-12 px-4 relative" style={{ background: '#faf7f2' }}>
       {/* Notebook lines */}
