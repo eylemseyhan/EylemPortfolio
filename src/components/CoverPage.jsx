@@ -13,7 +13,7 @@ export default function CoverPage() {
       }} />
 
       {/* Left binding strip with ring holes */}
-      <div className="absolute left-0 top-0 bottom-0 w-12 flex flex-col items-center justify-around py-4"
+      <div className="absolute left-0 top-0 bottom-0 w-12 hidden md:flex flex-col items-center justify-around py-4"
         style={{ background: 'rgba(0,0,0,0.2)', borderRight: '2px solid rgba(0,0,0,0.15)', zIndex: 50 }}>
         {[...Array(10)].map((_, i) => <div key={i} className="ring-hole" />)}
       </div>
@@ -106,7 +106,7 @@ export default function CoverPage() {
                 transform: 'rotate(-3deg)',
                 boxShadow: '2px 4px 0 rgba(0,0,0,0.15)',
               }}>
-              let it happen.
+              always building 🛠️
             </div>
             <div className="px-3 sm:px-4 py-1 sm:py-2 rounded-lg font-hand text-lg sm:text-xl text-emerald-950 font-bold"
               style={{

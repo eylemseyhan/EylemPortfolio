@@ -28,10 +28,10 @@ export default function AboutPage() {
       }} />
 
       {/* Left margin red line */}
-      <div className="absolute left-16 top-0 bottom-0 w-px" style={{ background: 'rgba(220,80,80,0.25)' }} />
+      <div className="absolute left-16 top-0 bottom-0 w-px hidden md:block" style={{ background: 'rgba(220,80,80,0.25)' }} />
 
       {/* Ring holes */}
-      <div className="absolute left-4 top-0 bottom-0 flex flex-col items-center justify-around py-8">
+      <div className="absolute left-4 top-0 bottom-0 hidden md:flex flex-col items-center justify-around py-8">
         {[...Array(10)].map((_, i) => <div key={i} className="ring-hole mb-2" />)}
       </div>
 
@@ -125,7 +125,7 @@ export default function AboutPage() {
         ))}
       </div>
 
-      <div className="max-w-4xl mx-auto pl-10 sm:pl-16 relative">
+      <div className="max-w-4xl mx-auto px-4 md:pl-16 relative flex flex-col items-center md:items-start text-center md:text-left">
         {/* Page header */}
         <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
           <div className="flex items-center gap-3">
@@ -141,7 +141,7 @@ export default function AboutPage() {
           </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-8 items-start">
+        <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start w-full">
           {/* Left: Avatar + Photo placeholder */}
           <div className="flex flex-col gap-4 items-center lg:items-start flex-shrink-0">
 
@@ -243,11 +243,11 @@ export default function AboutPage() {
           </div>
 
           {/* Right: Main text scattered notes */}
-          <div className="flex-1 relative flex flex-col gap-5">
+          <div className="flex-1 relative flex flex-col items-center lg:items-start gap-5 w-full mt-4 md:mt-0">
             {/* Intro text (Note 1) */}
             <motion.div
               variants={fadeUp} initial="hidden" animate="visible" custom={2}
-              className="p-5 rounded-sm relative sticky-note wobbly-border z-10"
+              className="p-4 md:p-5 rounded-sm relative sticky-note wobbly-border z-10 w-[95%] md:w-auto text-left"
               style={{
                 background: 'rgba(255,243,176,0.9)',
                 border: '1.5px solid rgba(200,176,100,0.4)',
@@ -278,7 +278,7 @@ export default function AboutPage() {
             {/* Current Work text (Note 2) */}
             <motion.div
               variants={fadeUp} initial="hidden" animate="visible" custom={3}
-              className="mb-8 p-5 rounded-sm relative sticky-note wobbly-border self-end max-w-[95%] -mt-3 z-20"
+              className="mb-8 p-4 md:p-5 rounded-sm relative sticky-note wobbly-border lg:self-end w-[95%] md:w-auto lg:max-w-[95%] -mt-3 z-20 text-left"
               style={{
                 background: '#e0f2fe', // light blue note
                 border: '1.5px solid rgba(125,180,220,0.4)',
