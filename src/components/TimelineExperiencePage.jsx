@@ -67,10 +67,10 @@ export default function TimelineExperiencePage() {
       }} />
 
       {/* Left margin */}
-      <div className="absolute left-16 top-0 bottom-0 w-px" style={{ background: 'rgba(220,80,80,0.2)' }} />
+      <div className="absolute left-16 top-0 bottom-0 w-px hidden md:block" style={{ background: 'rgba(220,80,80,0.2)' }} />
 
       {/* Ring holes */}
-      <div className="absolute left-4 top-0 bottom-0 flex flex-col items-center justify-around py-8">
+      <div className="absolute left-4 top-0 bottom-0 hidden md:flex flex-col items-center justify-around py-8">
         {[...Array(10)].map((_, i) => <div key={i} className="ring-hole mb-2" />)}
       </div>
 
@@ -115,7 +115,7 @@ export default function TimelineExperiencePage() {
         transition={{ repeat: Infinity, duration: 5.5, ease: 'easeInOut' }}
       />
 
-      <div className="max-w-4xl mx-auto pl-10 sm:pl-16 relative">
+      <div className="max-w-4xl mx-auto px-4 md:pl-16 relative flex flex-col items-center md:items-start text-center md:text-left">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10">
           <h2 className="font-sketch text-3xl sm:text-5xl font-bold text-[#3d2b1f]"

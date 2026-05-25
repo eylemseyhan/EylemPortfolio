@@ -44,8 +44,8 @@ export default function ContactPage() {
         backgroundImage: 'repeating-linear-gradient(transparent, transparent 27px, rgba(100,149,237,0.1) 28px)',
         backgroundSize: '100% 28px',
       }} />
-      <div className="absolute left-16 top-0 bottom-0 w-px" style={{ background: 'rgba(220,80,80,0.2)' }} />
-      <div className="absolute left-4 top-0 bottom-0 flex flex-col items-center justify-around py-8">
+      <div className="absolute left-16 top-0 bottom-0 w-px hidden md:block" style={{ background: 'rgba(220,80,80,0.2)' }} />
+      <div className="absolute left-4 top-0 bottom-0 hidden md:flex flex-col items-center justify-around py-8">
         {[...Array(10)].map((_, i) => <div key={i} className="ring-hole mb-2" />)}
       </div>
 
@@ -111,7 +111,7 @@ export default function ContactPage() {
         transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut' }}
       />
 
-      <div className="max-w-3xl mx-auto pl-10 sm:pl-16 relative">
+      <div className="max-w-3xl mx-auto px-4 md:pl-16 relative flex flex-col items-center md:items-start text-center md:text-left">
         {/* Envelope illustration */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
