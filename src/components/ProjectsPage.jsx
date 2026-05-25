@@ -84,7 +84,7 @@ export default function ProjectsPage() {
         transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
       />
 
-      <div className="max-w-5xl mx-auto px-4 md:pl-16 relative flex flex-col items-center md:items-start text-center md:text-left">
+      <div className="max-w-5xl mx-auto px-4 md:pl-16 relative">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -116,6 +116,7 @@ export default function BookViewer() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="min-h-screen relative flex flex-col"
       style={{
+        backgroundColor: '#3d2b1f',
         backgroundImage: 'url("/wood-desk.png")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -298,7 +299,7 @@ function DeskEnvironment({ currentIdx }) {
   const pointerClass = currentIdx === 0 ? "pointer-events-auto" : "pointer-events-none";
 
   return (
-    <div className="absolute inset-0 pointer-events-none hidden lg:block transition-opacity duration-1000" style={{ opacity, zIndex: 60 }}>
+    <div className="absolute inset-0 pointer-events-none hidden lg:block transition-opacity duration-0" style={{ opacity, zIndex: 60 }}>
       <div className="relative w-full h-full max-w-[1200px] mx-auto">
 
         {/* Coffee Cup */}

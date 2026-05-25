@@ -135,7 +135,7 @@ export default function TimelinePage() {
         </svg>
       </motion.div>
 
-      <div className="max-w-4xl mx-auto px-4 md:pl-16 relative flex flex-col items-center md:items-start text-center md:text-left">
+      <div className="max-w-4xl mx-auto px-4 md:pl-16 relative">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10">
           <h2 className="font-sketch text-4xl sm:text-5xl font-bold text-[#3d2b1f]"

@@ -111,7 +111,7 @@ export default function ContactPage() {
         transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut' }}
       />
 
-      <div className="max-w-3xl mx-auto px-4 md:pl-16 relative flex flex-col items-center md:items-start text-center md:text-left">
+      <div className="max-w-3xl mx-auto px-4 md:pl-16 relative">
         {/* Envelope illustration */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -124,17 +124,12 @@ export default function ContactPage() {
         {/* Header */}
         <motion.div
           variants={fadeUp} initial="hidden" animate="visible" custom={0}
-          className="mb-2 text-center"
+          className="mb-6 text-center w-full flex flex-col items-center"
         >
           <h2 className="font-sketch text-4xl sm:text-5xl font-bold text-[#3d2b1f]"
             style={{ transform: 'rotate(-1deg)', display: 'inline-block' }}>
             Let's talk! ♡
           </h2>
-          <p className="font-nunito text-[#7a6a5a] text-lg mt-2"
-            style={{ transform: 'rotate(-0.5deg)' }}>
-            I don't bite, I promise.<br />
-            <span className="text-sm">(unless you write spaghetti code)</span>
-          </p>
           <svg width="160" height="14" viewBox="0 0 160 14" className="mt-2 mx-auto">
             <path d="M4 10 Q40 3 80 10 Q120 17 156 8"
               stroke="#c8b8a0" strokeWidth="2.5" fill="none" strokeLinecap="round" />
