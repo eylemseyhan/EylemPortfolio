@@ -36,13 +36,7 @@ export default function TimelineEntry({ entry, index, side }) {
         {/* Tape decoration */}
         <div className="tape absolute -top-3 left-1/2 -translate-x-1/2 w-10 h-4" style={{ transform: 'translateX(-50%) rotate(-5deg)' }} />
 
-        {/* Current label */}
-        {entry.current && (
-          <div className="absolute -top-2 -right-2 bg-rose-400 text-white font-hand text-xs px-2 py-0.5 rounded-full rotate-12"
-            style={{ background: '#ff8fab', boxShadow: '1px 2px 0 rgba(0,0,0,0.15)' }}>
-            ★ CURRENT
-          </div>
-        )}
+
 
         {/* Emoji + Title */}
         <div className="flex items-start gap-2 mb-2">

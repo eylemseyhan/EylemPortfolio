@@ -84,7 +84,7 @@ export default function CoverPage() {
 
           {/* Subtitle */}
           <p className="font-hand text-[#faf7f2] text-xl sm:text-2xl mt-6 opacity-95" style={{ transform: 'rotate(1deg)' }}>
-            a messy little timeline of my journey ✿
+            a digital scrapbook of my coding adventures ✿
           </p>
 
 

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 const pages = [
   { id: 'about', label: 'About', emoji: '✿' },
   { id: 'timeline', label: 'Journey', emoji: '✎' },
+  { id: 'experience', label: 'Experience', emoji: '◈' },
   { id: 'projects', label: 'Projects', emoji: '★' },
   { id: 'skills', label: 'Skills', emoji: '◎' },
   { id: 'contact', label: 'Contact', emoji: '♡' },

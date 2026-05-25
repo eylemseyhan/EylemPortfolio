@@ -34,16 +34,24 @@
   ::-webkit-scrollbar {
     width: 8px;
   }
+
   ::-webkit-scrollbar-track {
     background: #f5f0e8;
   }
+
   ::-webkit-scrollbar-thumb {
     background: #c8b8a0;
     border-radius: 4px;
   }
 
   /* Global Lowercase Typography for Handcrafted Feel */
-  h1, h2, h3, nav a, .sticky-note, .sticky-note-text, .lowercase-all {
+  h1,
+  h2,
+  h3,
+  nav a,
+  .sticky-note,
+  .sticky-note-text,
+  .lowercase-all {
     text-transform: lowercase;
     letter-spacing: -0.02em;
   }
@@ -57,11 +65,9 @@
   }
 
   .notebook-lines {
-    background-image: repeating-linear-gradient(
-      transparent,
-      transparent 27px,
-      rgba(100, 149, 237, 0.12) 28px
-    );
+    background-image: repeating-linear-gradient(transparent,
+        transparent 27px,
+        rgba(100, 149, 237, 0.12) 28px);
     background-size: 100% 28px;
   }
 
@@ -75,7 +81,7 @@
 
   .font-caveat {
     font-family: 'Nunito', sans-serif;
-    font-weight: 500; 
+    font-weight: 500;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: -0.02em;
@@ -106,35 +112,81 @@
 
 /* Page flip animation */
 @keyframes pageFlipOut {
-  0% { transform: perspective(1200px) rotateY(0deg); transform-origin: left center; }
-  100% { transform: perspective(1200px) rotateY(-180deg); transform-origin: left center; }
+  0% {
+    transform: perspective(1200px) rotateY(0deg);
+    transform-origin: left center;
+  }
+
+  100% {
+    transform: perspective(1200px) rotateY(-180deg);
+    transform-origin: left center;
+  }
 }
 
 @keyframes floatDoodle {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  33% { transform: translateY(-10px) rotate(1deg); }
-  66% { transform: translateY(5px) rotate(-1deg); }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+
+  66% {
+    transform: translateY(5px) rotate(-1deg);
+  }
 }
 
 @keyframes wiggleSticky {
-  0%, 100% { transform: rotate(var(--rot, -2deg)); }
-  25% { transform: rotate(calc(var(--rot, -2deg) + 4deg)); }
-  75% { transform: rotate(calc(var(--rot, -2deg) - 4deg)); }
+
+  0%,
+  100% {
+    transform: rotate(var(--rot, -2deg));
+  }
+
+  25% {
+    transform: rotate(calc(var(--rot, -2deg) + 4deg));
+  }
+
+  75% {
+    transform: rotate(calc(var(--rot, -2deg) - 4deg));
+  }
 }
 
 @keyframes drawLine {
-  from { stroke-dashoffset: 300; }
-  to { stroke-dashoffset: 0; }
+  from {
+    stroke-dashoffset: 300;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 .float-doodle {
@@ -199,59 +251,61 @@
 .paper-scrap {
   clip-path: polygon(1% 0%, 99% 1%, 100% 97%, 2% 99%, 0% 50%);
   border-radius: 2px;
-  box-shadow: inset 0 0 4px rgba(0,0,0,0.05);
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
 }
 
 /* Page vignette — subtle dark edges like real paper under light */
 .page-vignette {
-  background: radial-gradient(ellipse at center, transparent 55%, rgba(60,40,20,0.07) 100%);
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(60, 40, 20, 0.07) 100%);
 }
 
 /* Book spine warm glow on left edge */
 .spine-glow {
-  background: linear-gradient(to right, rgba(100,65,30,0.13) 0%, rgba(100,65,30,0.05) 18%, transparent 45%);
+  background: linear-gradient(to right, rgba(100, 65, 30, 0.13) 0%, rgba(100, 65, 30, 0.05) 18%, transparent 45%);
 }
 
 /* Graphite smudge — like a hand dragged across pencil marks */
 .graphite-smudge {
-  background: radial-gradient(ellipse, rgba(80,80,80,0.06) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(80, 80, 80, 0.06) 0%, transparent 70%);
   border-radius: 50%;
 }
 
 /* Ink blot — tiny mishap */
 .ink-blot {
-  background: radial-gradient(ellipse, rgba(35,15,5,0.2) 0%, rgba(35,15,5,0.07) 45%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(35, 15, 5, 0.2) 0%, rgba(35, 15, 5, 0.07) 45%, transparent 70%);
   border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
 }
 
 /* Coffee ring — the essential developer artifact */
 .coffee-ring {
   border-radius: 50%;
-  border: 4px solid rgba(139,90,43,0.13);
-  box-shadow: 0 0 0 1.5px rgba(139,90,43,0.07), inset 0 0 0 4px rgba(139,90,43,0.04);
+  border: 4px solid rgba(139, 90, 43, 0.13);
+  box-shadow: 0 0 0 1.5px rgba(139, 90, 43, 0.07), inset 0 0 0 4px rgba(139, 90, 43, 0.04);
 }
 
 /* Folded corner — dog-eared page */
 .worn-corner-tr {
   position: absolute;
-  top: 0; right: 0;
-  width: 0; height: 0;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
   border-style: solid;
   border-width: 0 36px 36px 0;
   border-color: transparent #e8dfd0 transparent transparent;
-  filter: drop-shadow(-2px 2px 3px rgba(0,0,0,0.1));
+  filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.1));
 }
 
 /* Marker highlight — yellow marker stroke through text */
 .marker-highlight {
-  background: linear-gradient(120deg, transparent 0%, rgba(255,243,176,0.6) 10%, rgba(255,243,176,0.6) 90%, transparent 100%);
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 243, 176, 0.6) 10%, rgba(255, 243, 176, 0.6) 90%, transparent 100%);
   padding: 1px 4px;
   border-radius: 2px;
 }
 
 /* Erased pencil mark — light smear */
 .erased-mark {
-  background: linear-gradient(105deg, transparent 0%, rgba(245,240,228,0.6) 30%, rgba(245,240,228,0.7) 60%, transparent 100%);
+  background: linear-gradient(105deg, transparent 0%, rgba(245, 240, 228, 0.6) 30%, rgba(245, 240, 228, 0.7) 60%, transparent 100%);
   border-radius: 40% 60% 50% 50% / 60% 40% 60% 40%;
 }
 
@@ -263,22 +317,31 @@
 }
 
 /* Washi Tape Variants */
-.tape-pink { background-color: rgba(255, 182, 193, 0.6); }
-.tape-mint { background-color: rgba(152, 255, 152, 0.6); }
-.tape-yellow { background-color: rgba(255, 255, 150, 0.6); }
-.tape-blue { background-color: rgba(173, 216, 230, 0.6); }
+.tape-pink {
+  background-color: rgba(255, 182, 193, 0.6);
+}
+
+.tape-mint {
+  background-color: rgba(152, 255, 152, 0.6);
+}
+
+.tape-yellow {
+  background-color: rgba(255, 255, 150, 0.6);
+}
+
+.tape-blue {
+  background-color: rgba(173, 216, 230, 0.6);
+}
 
 .tape-stripes {
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 5px,
-    rgba(255,255,255,0.4) 5px,
-    rgba(255,255,255,0.4) 10px
-  );
+  background-image: repeating-linear-gradient(45deg,
+      transparent,
+      transparent 5px,
+      rgba(255, 255, 255, 0.4) 5px,
+      rgba(255, 255, 255, 0.4) 10px);
 }
 
 .tape-dots {
-  background-image: radial-gradient(rgba(255,255,255,0.6) 20%, transparent 20%);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.6) 20%, transparent 20%);
   background-size: 8px 8px;
 }
