@@ -137,11 +137,11 @@ export default function BookViewer() {
       <div className="pt-20 flex-1 w-full flex items-center justify-center p-4 lg:p-12 relative overflow-hidden">
 
         {/* Scattered Desk Items */}
-        <DeskEnvironment currentIdx={currentIdx} />
+        <DeskEnvironment currentIdx={currentIdx} bookState={bookState} />
 
         {/* MP3 Player - lives OUTSIDE DeskEnvironment so pointer-events always work */}
         {currentIdx === 0 && (
-          <div className="absolute top-[22%] left-[2%] sm:left-[5%] md:left-[7%] pointer-events-auto hidden lg:block" style={{ transform: 'rotateZ(-12deg)', zIndex: 40 }}>
+          <div className="absolute top-[22%] left-[2%] sm:left-[5%] md:left-[7%] pointer-events-auto hidden lg:block" style={{ transform: 'rotateZ(-12deg)', zIndex: currentIdx === 0 && bookState === 'read' ? 60 : 40 }}>
             <RetroMP3Player />
             {/* Visual cue to click */}
             <motion.div
@@ -160,21 +160,21 @@ export default function BookViewer() {
 
         {/* Vintage Stamp - lives OUTSIDE DeskEnvironment, positioned below MP3 */}
         {currentIdx === 0 && (
-          <div className="absolute top-[49%] left-[11%] hidden lg:block" style={{ transform: 'rotate(-12deg)', zIndex: 40 }}>
+          <div className="absolute top-[49%] left-[11%] hidden lg:block" style={{ transform: 'rotate(-12deg)', zIndex: currentIdx === 0 && bookState === 'read' ? 55 : 40 }}>
             <VintageStampSVG />
           </div>
         )}
 
         {/* Napkin Scribble - right side, outside DeskEnvironment */}
         {currentIdx === 0 && (
-          <div className="absolute top-[45%] right-[50%] hidden lg:block" style={{ transform: 'rotate(8deg)', zIndex: 40 }}>
+          <div className="absolute top-[45%] right-[50%] hidden lg:block" style={{ transform: 'rotate(8deg)', zIndex: currentIdx === 0 && bookState === 'read' ? 45 : 40 }}>
             <NapkinScribbleSVG />
           </div>
         )}
 
         {/* USB Hub - right side, below napkin */}
         {currentIdx === 0 && (
-          <div className="absolute top-[65%] right-[76%] hidden lg:block" style={{ transform: 'rotate(-4deg)', zIndex: 40 }}>
+          <div className="absolute top-[65%] right-[76%] hidden lg:block" style={{ transform: 'rotate(-4deg)', zIndex: currentIdx === 0 && bookState === 'read' ? 45 : 40 }}>
             <UsbHubSVG />
           </div>
         )}
@@ -292,12 +292,12 @@ export default function BookViewer() {
   )
 }
 
-function DeskEnvironment({ currentIdx }) {
+function DeskEnvironment({ currentIdx, bookState }) {
   const opacity = currentIdx === 0 ? 1 : 0;
   const pointerClass = currentIdx === 0 ? "pointer-events-auto" : "pointer-events-none";
 
   return (
-    <div className="absolute inset-0 hidden lg:block transition-opacity duration-1000" style={{ opacity, zIndex: 40 }}>
+    <div className="absolute inset-0 hidden lg:block transition-opacity duration-1000" style={{ opacity, zIndex: currentIdx === 0 && bookState === 'read' ? 60 : 40 }}>
       <div className="relative w-full h-full max-w-[1200px] mx-auto">
 
         {/* Coffee Cup */}
